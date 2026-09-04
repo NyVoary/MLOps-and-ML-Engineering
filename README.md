@@ -54,12 +54,395 @@ A short, synthetic sheet summarizing the mathematical or algorithmic intuition b
 
 ## ✅ Progress tracker
 
-- [ ] **01. Mathematical Foundations**
-  - [ ] 01.1 [Multivariable Calculus](01-mathematical-foundations/01-multivariable-calculus/README.md)
-    - [x] Partial Derivatives
-    - [x] Gradient Vectors
+The full checklist below mirrors the [roadmap.sh](https://roadmap.sh/ai/roadmap/machine-learning-engineering-and-mlops) tree — Section → Sub-section → Topic. Checked topics have a corresponding folder + README section; everything else is still ahead. *(Advanced Data Structures' sub-sections weren't fully visible when this list was captured — to be completed once that section is reached.)*
 
-*(Check off items as you progress through the roadmap; each sub-section links to its folder's README, where individual topics get their own section. New topics/sub-sections are added here as they're covered.)*
+<details open>
+<summary><b>01. Mathematical Foundations</b></summary>
+
+- [ ] 01.1 [Multivariable Calculus](01-mathematical-foundations/01-multivariable-calculus/README.md)
+  - [x] Partial Derivatives
+  - [x] Gradient Vectors
+  - [ ] Jacobian Matrices
+  - [ ] Hessian Matrices
+  - [ ] Lagrangian Multipliers
+  - [ ] Taylor Series Expansion
+  - [ ] Vector Calculus
+- [ ] 01.2 Linear Algebra Fundamentals
+  - [ ] Vector Spaces
+  - [ ] Matrix Decompositions
+  - [ ] Eigenvalues and Eigenvectors
+  - [ ] Singular Value Decomposition
+  - [ ] Principal Component Analysis
+  - [ ] Tensor Operations
+  - [ ] Quadratic Forms
+- [ ] 01.3 Mathematical Optimization
+  - [ ] Convex Optimization
+  - [ ] Gradient Descent Variants
+  - [ ] Stochastic Optimization
+  - [ ] Constrained Optimization
+  - [ ] Karush Kuhn Tucker Conditions
+  - [ ] Linear Programming
+  - [ ] Quadratic Programming
+- [ ] 01.4 Probability Theory
+  - [ ] Random Variables
+  - [ ] Probability Distributions
+  - [ ] Expectation and Variance
+  - [ ] Bayes Theorem
+  - [ ] Markov Chains
+  - [ ] Monte Carlo Methods
+
+</details>
+
+<details>
+<summary><b>02. Advanced Data Structures</b></summary>
+
+- [ ] Binary Search Trees
+- [ ] Merkle Trees
+- [ ] *(remaining sub-sections/topics to fill in once reached)*
+
+</details>
+
+<details>
+<summary><b>03. Advanced Algorithms</b></summary>
+
+- [ ] 03.1 Graph Algorithms
+  - [ ] Breadth First Search
+  - [ ] Depth First Search
+  - [ ] Dijkstra Algorithm
+  - [ ] Bellman Ford Algorithm
+  - [ ] Floyd Warshall Algorithm
+  - [ ] Minimum Spanning Trees
+  - [ ] Strongly Connected Components
+- [ ] 03.2 Algorithmic Paradigms
+  - [ ] Divide and Conquer
+  - [ ] Dynamic Programming
+  - [ ] Greedy Algorithms
+  - [ ] Backtracking
+  - [ ] Branch and Bound
+  - [ ] Randomized Algorithms
+  - [ ] Amortized Analysis
+
+</details>
+
+<details>
+<summary><b>04. Core Computer Science</b></summary>
+
+- [ ] 04.1 Numerical Algorithms
+  - [ ] Fast Fourier Transform
+  - [ ] Matrix Multiplication Algorithms
+  - [ ] Root Finding Methods
+  - [ ] Numerical Integration
+  - [ ] Interpolation Techniques
+  - [ ] Random Number Generation
+  - [ ] Floating Point Arithmetic
+- [ ] 04.2 String Algorithms
+  - [ ] Knuth Morris Pratt
+  - [ ] Boyer Moore
+  - [ ] Rabin Karp
+  - [ ] Levenshtein Distance
+  - [ ] Longest Common Subsequence
+  - [ ] Regular Expression Matching
+  - [ ] Sequence Alignment
+- [ ] 04.3 Computer Networks
+  - [ ] TCP and UDP Protocols
+  - [ ] HTTP and HTTPS
+  - [ ] DNS Resolution
+  - [ ] Load Balancing
+  - [ ] Network Security
+  - [ ] Socket Programming
+  - [ ] RESTful Architecture
+- [ ] 04.4 Operating Systems
+  - [ ] Process Management
+  - [ ] Thread Synchronization
+  - [ ] Virtual Memory
+  - [ ] File Systems
+  - [ ] Interprocess Communication
+  - [ ] Deadlock Handling
+  - [ ] CPU Scheduling
+
+</details>
+
+<details>
+<summary><b>05. Software Architecture</b></summary>
+
+- [ ] 05.1 Memory Management
+  - [ ] Garbage Collection
+  - [ ] Stack and Heap Allocation
+  - [ ] Memory Leaks
+  - [ ] Caching Strategies
+  - [ ] Pointer Arithmetic
+  - [ ] Buffer Overflows
+  - [ ] Memory Profiling
+- [ ] 05.2 Concurrency Models
+  - [ ] Multithreading
+  - [ ] Asynchronous Programming
+  - [ ] Actor Model
+  - [ ] Event Loops
+  - [ ] Lock Free Data Structures
+  - [ ] Software Transactional Memory
+  - [ ] Producer Consumer Pattern
+- [ ] 05.3 Architectural Styles
+  - [ ] Monolithic Architecture
+  - [ ] Microservices Architecture
+  - [ ] Event Driven Architecture
+  - [ ] Layered Architecture
+  - [ ] Serverless Architecture
+  - [ ] Clean Architecture
+  - [ ] Domain Driven Design
+- [ ] 05.4 Design Patterns
+  - [ ] Creational Patterns
+  - [ ] Structural Patterns
+  - [ ] Behavioral Patterns
+  - [ ] Singleton Pattern
+  - [ ] Factory Pattern
+  - [ ] Strategy Pattern
+  - [ ] Observer Pattern
+
+</details>
+
+<details>
+<summary><b>06. Data Engineering</b></summary>
+
+- [ ] 06.1 API Design
+  - [ ] RESTful Principles
+  - [ ] GraphQL Queries
+  - [ ] gRPC Protocols
+  - [ ] OpenAPI Specifications
+  - [ ] API Versioning
+  - [ ] Rate Limiting
+  - [ ] Authentication Schemes
+- [ ] 06.2 Code Quality
+  - [ ] SOLID Principles
+  - [ ] Code Refactoring
+  - [ ] Unit Testing
+  - [ ] Integration Testing
+  - [ ] Test Driven Development
+  - [ ] Continuous Integration
+  - [ ] Static Code Analysis
+- [ ] 06.3 Distributed Storage
+  - [ ] Distributed File Systems
+  - [ ] NoSQL Databases
+  - [ ] Columnar Databases
+  - [ ] Time Series Databases
+  - [ ] Object Storage
+  - [ ] Data Lakes
+  - [ ] Lakehouse Architecture
+- [ ] 06.4 Data Pipelines
+  - [ ] Extract Transform Load
+  - [ ] Batch Processing
+  - [ ] Stream Processing
+  - [ ] Data Ingestion
+  - [ ] Workflow Orchestration
+  - [ ] Data Validation
+  - [ ] Error Handling
+
+</details>
+
+<details>
+<summary><b>07. Classical Machine Learning</b></summary>
+
+- [ ] 07.1 Data Governance
+  - [ ] Data Quality
+  - [ ] Lineage Tracking
+  - [ ] Access Control
+  - [ ] Data Cataloging
+  - [ ] Metadata Management
+  - [ ] Schema Evolution
+  - [ ] Compliance Standards
+- [ ] 07.2 Big Data Processing
+  - [ ] MapReduce Paradigm
+  - [ ] Apache Spark Core
+  - [ ] Spark SQL
+  - [ ] Spark Streaming
+  - [ ] Distributed Joins
+  - [ ] Partitioning Strategies
+  - [ ] Shuffle Optimization
+- [ ] 07.3 Unsupervised Learning
+  - [ ] K Means Clustering
+  - [ ] Hierarchical Clustering
+  - [ ] DBSCAN Algorithm
+  - [ ] Gaussian Mixture Models
+  - [ ] Dimensionality Reduction
+  - [ ] Isolation Forests
+  - [ ] Association Rules
+- [ ] 07.4 Supervised Learning
+  - [ ] Linear Regression
+  - [ ] Logistic Regression
+  - [ ] Decision Trees
+  - [ ] Support Vector Machines
+  - [ ] Gradient Boosting
+  - [ ] Random Forests
+  - [ ] Naive Bayes
+- [ ] 07.5 Model Evaluation
+  - [ ] Cross Validation
+  - [ ] Precision and Recall
+  - [ ] ROC and AUC Curves
+  - [ ] Confusion Matrix
+  - [ ] Hyperparameter Tuning
+  - [ ] Overfitting Mitigation
+  - [ ] Bias Variance Tradeoff
+- [ ] 07.6 Feature Engineering
+  - [ ] Missing Value Imputation
+  - [ ] Categorical Encoding
+  - [ ] Feature Scaling
+  - [ ] Dimensionality Reduction
+  - [ ] Polynomial Features
+  - [ ] Text Vectorization
+  - [ ] Image Feature Extraction
+
+</details>
+
+<details>
+<summary><b>08. Deep Learning</b></summary>
+
+- [ ] 08.1 Convolutional Networks
+  - [ ] Convolutional Layers
+  - [ ] Pooling Operations
+  - [ ] Image Classification
+  - [ ] Object Detection
+  - [ ] Semantic Segmentation
+  - [ ] Transfer Learning
+  - [ ] Generative Adversarial Networks
+- [ ] 08.2 Neural Network Fundamentals
+  - [ ] Perceptrons
+  - [ ] Multi Layer Perceptrons
+  - [ ] Activation Functions
+  - [ ] Backpropagation
+  - [ ] Gradient Descent Optimizers
+  - [ ] Regularization Techniques
+  - [ ] Initialization Strategies
+- [ ] 08.3 Transformer Architectures
+  - [ ] Self Attention Mechanism
+  - [ ] Multi Head Attention
+  - [ ] Positional Encoding
+  - [ ] Encoder Only Models
+  - [ ] Decoder Only Models
+  - [ ] Encoder Decoder Models
+  - [ ] Fine Tuning Techniques
+- [ ] 08.4 Sequence Models
+  - [ ] Recurrent Neural Networks
+  - [ ] Long Short Term Memory
+  - [ ] Gated Recurrent Units
+  - [ ] Attention Mechanisms
+  - [ ] Sequence to Sequence Models
+  - [ ] Encoder Decoder Architecture
+  - [ ] Time Series Forecasting
+
+</details>
+
+<details>
+<summary><b>09. MLOps and Infrastructure</b></summary>
+
+- [ ] 09.1 Pipeline Orchestration
+  - [ ] Workflow Engines
+  - [ ] DAG Construction
+  - [ ] Dependency Management
+  - [ ] Automated Retraining
+  - [ ] Pipeline Monitoring
+  - [ ] Failure Recovery
+  - [ ] Artifact Management
+- [ ] 09.2 Model Deployment
+  - [ ] Containerization
+  - [ ] Model Serving
+  - [ ] REST Endpoints
+  - [ ] Batch Inference
+  - [ ] Edge Deployment
+  - [ ] Model Compression
+  - [ ] Hardware Acceleration
+- [ ] 09.3 Model Monitoring
+  - [ ] Data Drift Detection
+  - [ ] Performance Monitoring
+  - [ ] Latency Tracking
+  - [ ] Resource Utilization
+  - [ ] Alerting Systems
+  - [ ] Logging Frameworks
+- [ ] 09.4 Experiment Tracking
+  - [ ] Metrics Logging
+  - [ ] Parameter Tracking
+  - [ ] Artifact Storage
+  - [ ] Model Registry
+  - [ ] Experiment Comparison
+  - [ ] Reproducibility Control
+  - [ ] Metadata Tracking
+
+</details>
+
+<details>
+<summary><b>10. Production Software</b></summary>
+
+- [ ] 10.1 Cloud Infrastructure
+  - [ ] Infrastructure as Code
+  - [ ] Container Orchestration
+  - [ ] Virtual Private Clouds
+  - [ ] Identity Access Management
+  - [ ] Secret Management
+  - [ ] Cloud Storage Services
+  - [ ] Serverless Compute
+- [ ] 10.2 System Reliability
+  - [ ] High Availability
+  - [ ] Fault Tolerance
+  - [ ] Disaster Recovery
+  - [ ] Circuit Breakers
+  - [ ] Rate Limiting
+  - [ ] Graceful Degradation
+  - [ ] Chaos Engineering
+- [ ] 10.3 Security Operations
+  - [ ] Vulnerability Scanning
+  - [ ] Dependency Auditing
+  - [ ] Network Policies
+  - [ ] Encryption at Rest
+  - [ ] Encryption in Transit
+  - [ ] Access Auditing
+  - [ ] Compliance Checks
+- [ ] 10.4 Observability
+  - [ ] Distributed Tracing
+  - [ ] Metrics Collection
+  - [ ] Log Aggregation
+  - [ ] Health Checks
+  - [ ] Performance Profiling
+  - [ ] Root Cause Analysis
+  - [ ] Dashboard Creation
+
+</details>
+
+<details>
+<summary><b>11. Data Science Management</b></summary>
+
+- [ ] 11.1 Product Management
+  - [ ] Requirements Gathering
+  - [ ] Scope Definition
+  - [ ] Cost Benefit Analysis
+  - [ ] Roadmap Planning
+  - [ ] Agile Methodologies
+  - [ ] Minimum Viable Product
+  - [ ] Feature Prioritization
+- [ ] 11.2 Business Intelligence
+  - [ ] Data Visualization
+  - [ ] Dashboard Design
+  - [ ] KPI Tracking
+  - [ ] Exploratory Data Analysis
+  - [ ] Reporting Automation
+  - [ ] Stakeholder Communication
+  - [ ] Storytelling with Data
+- [ ] 11.3 Strategic Leadership
+  - [ ] Technical Strategy
+  - [ ] Cross Functional Collaboration
+  - [ ] Resource Allocation
+  - [ ] Risk Management
+  - [ ] Vendor Evaluation
+  - [ ] Innovation Management
+- [ ] 11.4 Ethical AI
+  - [ ] Bias Mitigation
+  - [ ] Fairness Metrics
+  - [ ] Explainable AI
+  - [ ] Privacy Preservation
+  - [ ] Regulatory Compliance
+  - [ ] Environmental Impact
+  - [ ] Accountability Frameworks
+
+</details>
+
+*(Check off items as you progress through the roadmap; each sub-section links to its folder's README once one exists, where individual topics get their own section.)*
 
 ## 🛠️ Code conventions
 
