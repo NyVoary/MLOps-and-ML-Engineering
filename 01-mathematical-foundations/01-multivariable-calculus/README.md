@@ -1,4 +1,4 @@
-# Partial Derivatives and Gradient Vector
+# Multivariable Calculus — Partial Derivatives, Gradient Vector & Jacobian Matrix
 
 ## 1. The Partial Derivative 🔍
 
@@ -61,7 +61,7 @@ $$f(x, y) = x^2 y + 4y^2$$
 
 Try to work out both calculations!
 
-## 3. Script structure
+## 3. Script Structure
 
 To keep software-engineering rigor (with doctests, typing, and docstrings):
 
@@ -95,7 +95,7 @@ $$\frac{\partial f}{\partial x} \approx \frac{f(x + h, y) - f(x - h, y)}{2h}$$
 | **Numerical** (NumPy) | Uses $\dfrac{f(x+h) - f(x-h)}{2h}$. | Very simple to implement. | Approximation (round-off errors), requires evaluating $f$ multiple times per parameter. | Gradient validation tests ("Gradient Checking"). |
 | **Delegated / Automatic** (PyTorch / Autograd) | Computes the exact gradient value at a given point by building a computation graph. | Ultra-fast, exact up to machine precision, ideal for millions of parameters. | Requires a dedicated autodiff framework. | All of modern Deep Learning (Backpropagation). |
 
-## 4. A note on the step size $h = 10^{-5}$
+## 4. A Note on the Step Size $h = 10^{-5}$
 
 In numerical finite-difference computation, the choice of $h = 10^{-5}$ (i.e. `1e-5`) is an ideal compromise for balancing two opposing types of computer error.
 
@@ -118,6 +118,120 @@ For a standard floating-point representation (64-bit double precision, with $\ep
 $$h \approx \sqrt[3]{\epsilon} \approx \sqrt[3]{10^{-16}} \approx 10^{-5.3}$$
 
 This is why $h = 10^{-5}$ (or $10^{-6}$) is the standard default setting in engineering: it minimizes both the geometric error of the curve and the round-off error of the computer. 💡
+
+## 5. The Jacobian Matrix 🧮
+
+### 5.1 From gradient to Jacobian
+
+So far, we've worked with functions that take several inputs $(x, y)$ but produce a single scalar output: $f(x, y) \in \mathbb{R}$. The gradient then gathers all the partial derivatives into a single vector.
+
+The **Jacobian matrix** is simply the generalization of the gradient for functions with several inputs **and** several outputs:
+
+$$\mathbf{F}(x, y) = \begin{pmatrix} f_1(x, y) \\ f_2(x, y) \end{pmatrix}$$
+
+Each **row** of the Jacobian matrix is the gradient of one of the output functions:
+
+$$\mathbf{J} = \begin{pmatrix} \dfrac{\partial f_1}{\partial x} & \dfrac{\partial f_1}{\partial y} \\[6pt] \dfrac{\partial f_2}{\partial x} & \dfrac{\partial f_2}{\partial y} \end{pmatrix}$$
+
+### 5.2 Worked example
+
+Consider a function $\mathbf{F}$ that takes a 2D point $(x, y)$ as input and returns a 2D vector as output:
+
+$$\mathbf{F}(x, y) = \begin{pmatrix} f_1(x, y) \\ f_2(x, y) \end{pmatrix} = \begin{pmatrix} x^2 y \\ x + 3y \end{pmatrix}$$
+
+**Symbolic partial derivatives**, computed one at a time:
+
+- $\dfrac{\partial f_1}{\partial x} = 2xy$
+- $\dfrac{\partial f_1}{\partial y} = x^2$
+- $\dfrac{\partial f_2}{\partial x} = 1$
+- $\dfrac{\partial f_2}{\partial y} = 3$
+
+Which gives the symbolic Jacobian matrix:
+
+$$J(x, y) = \begin{pmatrix} 2xy & x^2 \\ 1 & 3 \end{pmatrix}$$
+
+**Evaluating at a specific point** $(x = 2, y = 3)$:
+
+- $2xy = 2 \cdot 2 \cdot 3 = 12$
+- $x^2 = 2^2 = 4$
+
+$$J(2, 3) = \begin{pmatrix} 12 & 4 \\ 1 & 3 \end{pmatrix}$$
+
+> 💡 **Reading the matrix**: row 1 corresponds to output $f_1$, column 1 corresponds to input $x$. The entry $J_{11} = 12$ is the partial derivative $\dfrac{\partial f_1}{\partial x}$ — it tells us $f_1$'s *sensitivity* to $x$. If we nudge $x$ by $+0.01$ (keeping $y = 3$ fixed), $f_1$ increases by roughly $12 \times 0.01 = +0.12$: each entry of the Jacobian is a local rate of change, exactly like a single partial derivative.
+
+### 5.3 General shape rule
+
+For a function $\mathbf{F}: \mathbb{R}^n \to \mathbb{R}^m$ (with $n$ inputs and $m$ outputs), the Jacobian matrix has shape $m \times n$: **one row per output, one column per input**.
+
+For example, with 3 input variables and 2 output functions:
+
+$$J = \begin{pmatrix} \dfrac{\partial f_1}{\partial x_1} & \dfrac{\partial f_1}{\partial x_2} & \dfrac{\partial f_1}{\partial x_3} \\[6pt] \dfrac{\partial f_2}{\partial x_1} & \dfrac{\partial f_2}{\partial x_2} & \dfrac{\partial f_2}{\partial x_3} \end{pmatrix} \quad (2 \times 3 \text{ matrix})$$
+
+### 5.4 Two ways to read the Jacobian
+
+The same object is used very differently depending on the field:
+
+- **Geometry / analysis** 📐: the Jacobian measures how a transformation deforms space (change of variables, volume computation via the Jacobian determinant, surface deformation). More formally, it's the linear map that gives the best local approximation of a differentiable function between two vector spaces.
+- **Machine Learning** 🤖: the Jacobian measures how sensitive each output of a model is to each input. If a neural network layer takes a 3D input vector $X$ and produces a 2D output vector $Y$, the Jacobian matrix contains every rate of change needed to propagate the error backward (**backpropagation**).
+
+### 5.5 The Jacobian inside a neural network layer
+
+Consider a dense (fully-connected) layer with 3 inputs ($x_1, x_2, x_3$) and 2 output neurons ($z_1, z_2$), each computed as a weighted sum plus a bias:
+
+$$z_1 = w_{11}x_1 + w_{12}x_2 + w_{13}x_3 + b_1$$
+$$z_2 = w_{21}x_1 + w_{22}x_2 + w_{23}x_3 + b_2$$
+
+During training, backpropagation needs to answer: *"If I slightly change input $x_1$, how does it affect $z_1$ **and** $z_2$?"* That information is exactly the Jacobian of the layer, $\mathbf{J} = \dfrac{\partial \mathbf{z}}{\partial \mathbf{x}}$:
+
+$$J = \begin{pmatrix} \dfrac{\partial z_1}{\partial x_1} & \dfrac{\partial z_1}{\partial x_2} & \dfrac{\partial z_1}{\partial x_3} \\[6pt] \dfrac{\partial z_2}{\partial x_1} & \dfrac{\partial z_2}{\partial x_2} & \dfrac{\partial z_2}{\partial x_3} \end{pmatrix} = \begin{pmatrix} w_{11} & w_{12} & w_{13} \\ w_{21} & w_{22} & w_{23} \end{pmatrix}$$
+
+**Key takeaway**: for a linear layer $Z = WX + B$, the Jacobian with respect to the input $X$ is nothing but the weight matrix $W$ itself. This is why libraries like PyTorch and TensorFlow are, under the hood, continuously multiplying Jacobian matrices together (via the chain rule) to propagate the error from layer to layer.
+
+## 6. Backpropagation & Gradient Descent — Putting It All Together 🔄
+
+### 6.1 The learning cycle
+
+Training a neural network loops through three phases:
+
+1. **Forward pass** ➡️: input data flows through the network, layer by layer, to produce a prediction.
+2. **Loss calculation** 🎯: a cost function (e.g. squared error) compares the prediction to the true target to measure the overall error $\mathcal{L}$.
+3. **Backpropagation** ⬅️: the error computed at the output is propagated backward through the network.
+
+### 6.2 The chain rule and the Jacobian
+
+During backpropagation, we need the gradient of the loss $\mathcal{L}$ with respect to every weight $w$ and bias $b$. For a simple chain $x \to (\text{neuron}, w) \to \hat{y} \to \mathcal{L}$, the chain rule multiplies local sensitivities:
+
+$$\frac{\partial \mathcal{L}}{\partial w} = \frac{\partial \mathcal{L}}{\partial \hat{y}} \times \frac{\partial \hat{y}}{\partial w}$$
+
+In a deep network with several layers and neurons, these local-sensitivity computations become **Jacobian matrix multiplications**. Concretely, for a layer with 3 inputs and 2 outputs, the layer's Jacobian $\dfrac{\partial Z}{\partial X}$ has shape $2 \times 3$, and the incoming error vector from the layer above, $\dfrac{\partial \mathcal{L}}{\partial Z}$, has shape $1 \times 2$ (one value per output). Multiplying them:
+
+$$\underbrace{\frac{\partial \mathcal{L}}{\partial X}}_{1 \times 3} = \underbrace{\frac{\partial \mathcal{L}}{\partial Z}}_{1 \times 2} \times \underbrace{\frac{\partial Z}{\partial X}}_{2 \times 3}$$
+
+redistributes the output error back onto each of the 3 inputs — this is exactly how the error "climbs back" through every layer of the network.
+
+### 6.3 Gradient Descent recap
+
+**Gradient Descent** is the optimization algorithm that uses these gradients to actually minimize the loss — like descending a mountain in the fog 🌫️: at each step, you look at the slope under your feet and step in the steepest downward direction.
+
+| Component | Role |
+|---|---|
+| Cost function $\mathcal{L}$ | Measures the model's overall error; the quantity we want to minimize. |
+| Gradient $\nabla \mathcal{L}$ | Vector of all partial derivatives of the loss; always points toward the steepest **increase**. |
+| Learning rate $\eta$ | Small positive number (e.g. $0.01$) controlling the step size at each iteration. |
+
+Update rule for a weight $w$:
+
+$$w_{\text{new}} = w_{\text{current}} - \eta \cdot \frac{\partial \mathcal{L}}{\partial w}$$
+
+The **minus sign** is crucial: since the gradient points where the function increases, we step in the opposite direction to decrease it. For example, if $\dfrac{\partial \mathcal{L}}{\partial w} = +5$ (increasing $w$ increases the error), the update rule *decreases* $w$ — exactly what we want.
+
+**Algorithm outline:**
+
+1. Initialize weights (often randomly).
+2. Compute the prediction and current error (forward pass).
+3. Compute the gradient of the error with respect to every weight (backpropagation).
+4. Update every weight using the rule above.
+5. Repeat steps 2–4 until the error stops decreasing (convergence).
 
 ---
 
@@ -176,6 +290,44 @@ BEGIN
 END
 ```
 
+### Pseudo-code: Jacobian Matrix (Central Difference)
+
+```
+ALGORITHM: Calculate Jacobian Matrix
+
+INPUT:
+    - F: vector-valued function returning an array of size m
+    - point: vector [x1, x2, ..., xn] of size n
+    - h: step size (default = 1e-5)
+
+OUTPUT:
+    - J: Jacobian matrix of size (m x n)
+
+BEGIN
+    1. Evaluate F_ref = F(point)
+    2. Set m = length(F_ref)
+    3. Set n = length(point)
+
+    4. Initialize J as a zero matrix of shape (m, n)
+
+    5. FOR each column index 'j' from 0 to n - 1 DO:
+           Create copy 'point_plus' = point
+           Create copy 'point_minus' = point
+
+           point_plus[j] = point_plus[j] + h
+           point_minus[j] = point_minus[j] - h
+
+           F_plus = F(point_plus)
+           F_minus = F(point_minus)
+
+           // Compute numerical partial derivative for all outputs with respect to variable j
+           J[:, j] = (F_plus - F_minus) / (2 * h)
+       END FOR
+
+    RETURN J
+END
+```
+
 ### Pseudo-code: Interactive Partial Derivatives & Gradient Calculator
 
 ```
@@ -213,64 +365,3 @@ BEGIN
     7. Display symbolic formulas (SymPy), numerical evaluations (NumPy), and the Gradient Vector
 END
 ```
-
-
-
-La Matrice Jacobienne en bref 🧠Jusqu'à présent, nous avons travaillé avec des fonctions qui prennent plusieurs entrées $(x, y)$ et donnent une seule sortie (un nombre scalaire) : $f(x,y) \in \mathbb{R}$. Le gradient regroupe alors toutes les dérivées partielles dans un seul vecteur.La Matrice Jacobienne est tout simplement la généralisation du gradient pour les fonctions à plusieurs entrées ET plusieurs sorties :$$\mathbf{F}(x, y) = \begin{pmatrix} f_1(x, y) \\ f_2(x, y) \end{pmatrix}$$Chaque ligne de la matrice Jacobienne représente le gradient d'une des fonctions de sortie :$$\mathbf{J} = \begin{pmatrix} \frac{\partial f_1}{\partial x} & \frac{\partial f_1}{\partial y} \\ \frac{\partial f_2}{\partial x} & \frac{\partial f_2}{\partial y} \end{pmatrix}$$
-
-Step 1: L'Exemple Mathématique Simple 📐Imaginons une fonction $\mathbf{F}$ qui prend un point à deux dimensions $(x, y)$ en entrée et renvoie un vecteur à deux dimensions en sortie :$$\mathbf{F}(x, y) = \begin{pmatrix} f_1(x, y) \\ f_2(x, y) \end{pmatrix} = \begin{pmatrix} x^2 \cdot y \\ x + 3y \end{pmatrix}$$1. Formule Générale de la Matrice JacobienneLa matrice Jacobienne $J$ regroupe toutes les dérivées partielles. Chaque ligne correspond à une fonction de sortie ($f_1, f_2$), et chaque colonne à une variable d'entrée ($x, y$) :$$J = \begin{pmatrix} \frac{\partial f_1}{\partial x} & \frac{\partial f_1}{\partial y} \\ \frac{\partial f_2}{\partial x} & \frac{\partial f_2}{\partial y} \end{pmatrix}$$2. Calcul des Dérivées Partielles SymboliquesCalculons chaque élément un par un :$\frac{\partial f_1}{\partial x} = 2xy$$\frac{\partial f_1}{\partial y} = x^2$$\frac{\partial f_2}{\partial x} = 1$$\frac{\partial f_2}{\partial y} = 3$Ce qui nous donne la matrice symbolique :$$J(x, y) = \begin{pmatrix} 2xy & x^2 \\ 1 & 3 \end{pmatrix}$$3. Évaluation en un Point PrécisÉvaluons maintenant cette Jacobienne au point $(x = 2, y = 3)$ :$2xy = 2 \cdot 2 \cdot 3 = 12$$x^2 = 2^2 = 4$La matrice Jacobienne numérique au point $(2, 3)$ est donc :$$J(2, 3) = \begin{pmatrix} 12 & 4 \\ 1 & 3 \end{pmatrix}$$Petite question pour vérifier l'intuition 💡D'après cette matrice $J(2, 3) = \begin{pmatrix} 12 & 4 \\ 1 & 3 \end{pmatrix}$ :Si l'on augmente très légèrement la valeur de $x$ de $+0.01$ (tout en gardant $y=3$ fixe), de combien environ la première sortie $f_1$ va-t-elle augmenter ?(Indice : regarde l'élément à la 1ère ligne, 1ère colonne !)
-
-Voici un rappel rapide de ce que nous avions :Le point de départ : Nous avons évalué notre matrice au point $(x = 2, y = 3)$.Le résultat obtenu :$$J(2, 3) = \begin{pmatrix} 12 & 4 \\ 1 & 3 \end{pmatrix}$$Ce que signifie chaque case :Première ligne : Concerne la première sortie $f_1$.Première colonne : Concerne la variable d'entrée $x$.Le chiffre $12$ (en haut à gauche) est donc la dérivée partielle $\frac{\partial f_1}{\partial x} = 12$.Qu'est-ce que ce $12$ veut dire en pratique ? 📈La dérivée partielle indique le taux de variation (la sensibilité). Un chiffre de $12$ signifie que :Si tu avances d'un tout petit pas dans la direction de $x$, la valeur de $f_1$ augmente 12 fois plus vite que ce petit pas.Si on augmente $x$ de $+0.01$ (en gardant $y$ fixe) :L'augmentation de $f_1$ sera d'environ : $12 \times 0.01 = +0.12$.
-
-En effet, dans un cours de géométrie ou d'espace de Banach, on la présente souvent sous son angle le plus pur : une application linéaire qui donne la meilleure approximation locale d'une fonction différentiable entre deux espaces vectoriels.C'est exactement la même chose, mais le contexte d'utilisation change :En Géométrie / Analyse globale 📐 : La Jacobienne te sert à mesurer comment une transformation déforme l'espace (changement de variables, calcul de volumes via le déterminant jacobien, déformation de surfaces).En Machine Learning 🤖 : Elle sert à mesurer comment chaque sortie du modèle réagit à chaque entrée.Prenons un exemple rapide en ML pour faire le lien :Si une couche de réseau de neurones prend un vecteur d'entrée $X$ à 3 dimensions et ressort un vecteur $Y$ à 2 dimensions, la matrice Jacobienne contient tous les taux de variation nécessaires pour propagée l'erreur à l'envers (la backpropagation).
-
-Pour une fonction avec 3 variables d'entrée et 2 sorties, la matrice Jacobienne aura bien :2 lignes (une pour chaque fonction de sortie $f_1, f_2$)3 colonnes (une pour chaque variable d'entrée $x_1, x_2, x_3$)Ce qui nous donne une matrice de taille $2 \times 3$ :$$J = \begin{pmatrix} \frac{\partial f_1}{\partial x_1} & \frac{\partial f_1}{\partial x_2} & \frac{\partial f_1}{\partial x_3} \\ \frac{\partial f_2}{\partial x_1} & \frac{\partial f_2}{\partial x_2} & \frac{\partial f_2}{\partial x_3} \end{pmatrix}$$La règle d'or à retenir 📐Pour toute fonction $\mathbf{F}: \mathbb{R}^n \to \mathbb{R}^m$ (avec $n$ entrées et $m$ sorties) :La Matrice Jacobienne est de taille $m \times n$ ($m$ lignes, $n$ colonnes).
-
-Voici l'illustration concrète de la Matrice Jacobienne dans un réseau de neurones 🤖.Le Scénario : Une couche de réseau de neuronesImaginons une couche intermédiaire d'un réseau de neurones dense (Fully Connected Layer).Les Entrées ($x_1, x_2, x_3$) : Le vecteur des valeurs transmises par la couche précédente (par exemple, 3 caractéristiques extraites d'une image).Les Sorties ($z_1, z_2$) : Le vecteur produit par cette couche (2 neurones de sortie).Chaque neurone calcule une somme pondérée par ses poids $w$ et un biais $b$ :$$z_1 = w_{11}x_1 + w_{12}x_2 + w_{13}x_3 + b_1$$$$z_2 = w_{21}x_1 + w_{22}x_2 + w_{23}x_3 + b_2$$À quoi sert la Matrice Jacobienne ici ? 🎯Pendant la phase d'entraînement, le réseau commet une erreur au niveau de ses sorties (mesurée par une fonction de perte $\mathcal{L}$). Pour ajuster les poids des couches précédentes, l'algorithme de Backpropagation doit savoir :"Si je modifie légèrement l'entrée $x_1$, quel impact cela a-t-il sur la sortie $z_1$ ET sur la sortie $z_2$ ?"Cette information précise est stockée dans la Matrice Jacobienne de la couche ($\mathbf{J} = \frac{\partial \mathbf{z}}{\partial \mathbf{x}}$) :$$J = \begin{pmatrix} \frac{\partial z_1}{\partial x_1} & \frac{\partial z_1}{\partial x_2} & \frac{\partial z_1}{\partial x_3} \\ \frac{\partial z_2}{\partial x_1} & \frac{\partial z_2}{\partial x_2} & \frac{\partial z_2}{\partial x_3} \end{pmatrix} = \begin{pmatrix} w_{11} & w_{12} & w_{13} \\ w_{21} & w_{22} & w_{23} \end{pmatrix}$$Constat clé : Pour une couche linéaire $Z = W X + B$, la matrice Jacobienne par rapport à l'entrée $X$ n'est autre que la matrice des poids $W$ elle-même !C'est pour cela que les bibliothèques comme PyTorch ou TensorFlow effectuent continuellement des multiplications de matrices Jacobiennes sous le capot (via la règle de dérivation en chaîne / Chain Rule) pour transmettre l'erreur de couche en couche.
-
-ALGORITHM: Calculate Jacobian Matrix (Central Difference)
-
-INPUT:
-    - F: vector-valued function returning an array of size m
-    - point: vector [x1, x2, ..., xn] of size n
-    - h: step size (default = 1e-5)
-
-OUTPUT:
-    - J: Jacobian matrix of size (m x n)
-
-BEGIN
-    1. Evaluate F_ref = F(point)
-    2. Set m = length(F_ref)
-    3. Set n = length(point)
-    
-    4. Initialize J as a zero matrix of shape (m, n)
-    
-    5. FOR each column index 'j' from 0 to n - 1 DO:
-           Create copy 'point_plus' = point
-           Create copy 'point_minus' = point
-           
-           point_plus[j] = point_plus[j] + h
-           point_minus[j] = point_minus[j] - h
-           
-           F_plus = F(point_plus)
-           F_minus = F(point_minus)
-           
-           // Compute numerical partial derivative for all outputs with respect to variable j
-           J[:, j] = (F_plus - F_minus) / (2 * h)
-       END FOR
-       
-    RETURN J
-END
-
-L'algorithme de Backpropagation (ou rétropropagation de l'erreur) est le moteur principal qui permet aux réseaux de neurones d'apprendre ! 🧠Pour bien le comprendre, c'est tout simplement l'application pratique de la dérivation en chaîne (Chain Rule) du calcul multivariable pour ajuster les poids d'un réseau.Voyons ensemble comment il fonctionne pas à pas. Nous utiliserons des questions guidées pour construire une intuition solide ! 🚀🔄 Les 3 étapes du cycle d'apprentissageL'apprentissage d'un réseau de neurones se fait en boucle à travers trois grandes phases :La Passe Avant (Forward Pass) ➡️ : Les données d'entrée traversent le réseau de couche en couche pour produire une prédiction.Le Calcul de la Perte (Loss Calculation) 🎯 : Une fonction de coût (ex: l'erreur quadratique) compare la prédiction du réseau avec la vraie valeur cible pour mesurer l'erreur globale.La Passe Arrière (Backpropagation) ⬅️ : C'est ici qu'intervient l'algorithme ! L'erreur calculée à la sortie est propagée en sens inverse à travers tout le réseau.⚙️ Le rôle de la BackpropagationPendant cette passe arrière, la Backpropagation calcule le gradient de la fonction de perte par rapport à chaque poids $w$ et chaque biais $b$ du réseau.En termes simples, elle répond à la question :"Si je modifie légèrement ce poids particulier $w$ au début ou au milieu du réseau, de combien l'erreur globale va-t-elle augmenter ou diminuer ?"Grâce à ces gradients, un algorithme d'optimisation (comme la Descente de Gradient) sait exactement dans quelle direction et de combien ajuster chaque poids pour réduire l'erreur lors des prochaines prédictions ! 📉💡 Un exemple visuel simpleImaginons une chaîne très simple avec 3 étapes :$$\text{Entrée } x \longrightarrow \text{Neurone (Poids } w) \longrightarrow \text{Prédiction } \hat{y} \longrightarrow \text{Erreur } \mathcal{L}$$Pour savoir comment le poids $w$ influence l'erreur finale $\mathcal{L}$, la règle de dérivation en chaîne nous dit de multiplier les sensibilités locales :$$\frac{\partial \mathcal{L}}{\partial w} = \frac{\partial \mathcal{L}}{\partial \hat{y}} \times \frac{\partial \hat{y}}{\partial w}$$$\frac{\partial \mathcal{L}}{\partial \hat{y}}$ : Comment l'erreur change selon la prédiction.$\frac{\partial \hat{y}}{\partial w}$ : Comment la prédiction change selon le poids.Dans un réseau profond avec plusieurs couches et plusieurs neurones, ces calculs de sensibilité locale prennent la forme de multiplications de Matrices Jacobiennes !🧪 Une petite question pour vérifier ton intuitionImaginons que nous venons de calculer la passe arrière pour un poids $w$. La dérivée nous donne :$$\frac{\partial \mathcal{L}}{\partial w} = +5$$Cela signifie qu'augmenter le poids $w$ fait augmenter l'erreur globale.Pour diminuer l'erreur lors de l'étape d'ajustement, devrions-nous augmenter ou diminuer la valeur de ce poids $w$ ?
-
-Oui, exactement ! 📉 On doit la diminuer.💡 Pourquoi ?Si la dérivée est positive ($\frac{\partial \mathcal{L}}{\partial w} = +5$), cela signifie que le poids $w$ et l'erreur $\mathcal{L}$ évoluent dans le même sens :↗️ Si on augmente $w$, l'erreur augmente.↘️ Si on diminue $w$, l'erreur diminue.Comme notre but en Machine Learning est de minimiser l'erreur 🎯, nous devons aller dans le sens inverse du gradient !📐 La règle de mise à jour (Descente de Gradient)C'est pour cela que dans la formule de mise à jour de la Descente de Gradient, on met un signe MOINS :$$w_{\text{nouveau}} = w_{\text{actuel}} - \eta \cdot \frac{\partial \mathcal{L}}{\partial w}$$(où $\eta$ est le taux d'apprentissage / learning rate, un tout petit nombre positif comme $0.01$)🚀 En résuméPasse Avant (Forward Pass) : On calcule la prédiction et l'erreur ➡️Backpropagation : On calcule les gradients (Matrices Jacobiennes) pour connaître l'impact de chaque poids sur l'erreur ⬅️Mise à jour : On ajuste les poids dans le sens opposé du gradient pour réduire l'erreur 📉
-
-L'algorithme de la Descente de Gradient 📉 est une méthode d'optimisation fondamentale utilisée pour trouver le minimum d'une fonction de coût (ou fonction de perte $\mathcal{L}$).En termes simples, c'est comme essayer de descendre une montagne dans le brouillard 🌫️ : à chaque pas, tu regardes la pente sous tes pieds et tu fais un pas dans la direction la plus descendante.Voici un rappel synthétique de ses composants clés et de sa formule :🧱 Les 3 éléments de baseLa Fonction de Coût ($\mathcal{L}$) : Elle mesure l'erreur globale de notre modèle. Notre objectif est de rendre cette erreur la plus petite possible 🎯.Le Gradient ($\nabla \mathcal{L}$) : C'est le vecteur qui contient toutes les dérivées partielles de la fonction de coût. Il pointe toujours dans la direction où la fonction augmente le plus vite.Le Taux d'Apprentissage ($\eta$ / Learning Rate) : Un petit nombre positif (ex: $0.01$) qui contrôle la taille du pas que l'on fait à chaque itération.📐 La Formule de Mise à JourPour ajuster un poids $w$ (ou l'ensemble des paramètres), on applique cette règle à chaque étape :$$w_{\text{nouveau}} = w_{\text{actuel}} - \eta \cdot \frac{\partial \mathcal{L}}{\partial w}$$Le signe MOINS est crucial : comme le gradient montre où la fonction monte, on prend sa direction opposée pour la faire descendre.🔄 Les Étapes de l'AlgorithmeInitialiser les poids avec des valeurs de départ (souvent aléatoires).Calculer la prédiction et l'erreur actuelle (Passe Avant / Forward Pass).Calculer le gradient de l'erreur par rapport à chaque poids (Backpropagation).Mettre à jour chaque poids en utilisant la formule ci-dessus.Répéter les étapes 2 à 4 jusqu'à ce que l'erreur ne diminue plus (convergence).
-
-Reprenons l'exemple 2 pas à pas pour que tout devienne limpide.1. La couche de neurones (Forward Pass) ➡️Imaginons une simple couche de réseau de neurones :Entrées ($X$) : Un vecteur de 3 valeurs, par exemple $X = [x_1, x_2, x_3]^T$.Sorties ($Z$) : Un vecteur de 2 neurones, $Z = [z_1, z_2]^T$.Pour calculer ces sorties, chaque neurone multiplie les entrées par ses propres poids ($W$) et ajoute un biais ($b$) :$$z_1 = \mathbf{w_{11}}x_1 + \mathbf{w_{12}}x_2 + \mathbf{w_{13}}x_3 + b_1$$$$z_2 = \mathbf{w_{21}}x_1 + \mathbf{w_{22}}x_2 + \mathbf{w_{23}}x_3 + b_2$$2. Le calcul de la Jacobienne 📐Rappelons-nous : la matrice Jacobienne regroupe toutes les dérivées partielles de chaque sortie par rapport à chaque entrée.Sa taille est de 2 lignes (les sorties $z_1, z_2$) et 3 colonnes (les entrées $x_1, x_2, x_3$) :$$J = \begin{pmatrix} \frac{\partial z_1}{\partial x_1} & \frac{\partial z_1}{\partial x_2} & \frac{\partial z_1}{\partial x_3} \\ \frac{\partial z_2}{\partial x_1} & \frac{\partial z_2}{\partial x_2} & \frac{\partial z_2}{\partial x_3} \end{pmatrix}$$Calculons chaque élément de la 1ère ligne (dérivées de $z_1$) :$\frac{\partial z_1}{\partial x_1} = w_{11}$ (car la dérivée de $w_{11}x_1$ par rapport à $x_1$ est simplement $w_{11}$, et tout le reste compte comme constante)$\frac{\partial z_1}{\partial x_2} = w_{12}$$\frac{\partial z_1}{\partial x_3} = w_{13}$Si on fait la même chose pour la 2ème ligne ($z_2$), on obtient :$$J = \begin{pmatrix} w_{11} & w_{12} & w_{13} \\ w_{21} & w_{22} & w_{23} \end{pmatrix} = W$$3. La révélation du code 💡Dans notre script Python, la fonction neural_layer(X) calcule $Z = W \cdot X + b$.Quand notre fonction compute_jacobian fait de la différenciation numérique sur neural_layer, elle calcule l'impact d'une petite variation de $X$ sur $Z$. Et la matrice de résultats obtenue J2 s'avère être exactement égale à la matrice de poids $W$ !
-
-Examinons le rôle crucial de la matrice Jacobienne dans le Machine Learning 🧠.Pendant la phase de Backpropagation (rétropropagation), notre objectif est de savoir comment chaque paramètre (poids $W$) contribue à l'erreur globale $\mathcal{L}$.Pour y parvenir, nous utilisons la règle de dérivation en chaîne (Chain Rule).1. La Règle de Dérivation en Chaîne 🔗Dans un réseau de neurones avec plusieurs couches, la fonction globale est une composition de plusieurs sous-fonctions :$$\text{Entrée } X \xrightarrow{\quad \text{Couche 1} \quad} Z \xrightarrow{\quad \text{Couche 2 (Loss)} \quad} \mathcal{L}$$Pour trouver la sensibilité de l'erreur $\mathcal{L}$ par rapport à l'entrée $X$, la règle en chaîne s'écrit :$$\frac{\partial \mathcal{L}}{\partial X} = \frac{\partial \mathcal{L}}{\partial Z} \cdot \frac{\partial Z}{\partial X}$$$\frac{\partial \mathcal{L}}{\partial Z}$ : Le gradient de l'erreur venant de la couche supérieure.$\frac{\partial Z}{\partial X}$ : La Matrice Jacobienne de la couche courante !2. Le Rôle Concret de la Jacobienne dans une Couche 📐La matrice Jacobienne $\frac{\partial Z}{\partial X}$ agit comme une passerelle de conversion :Elle prend le vecteur d'erreur transmis par la couche suivante ($\frac{\partial \mathcal{L}}{\partial Z}$).Elle le multiplie pour transformer cette erreur et la redistribuer équitablement à chaque variable d'entrée de la couche précédente ($\frac{\partial \mathcal{L}}{\partial X}$).Sans la matrice Jacobienne, un réseau de neurones à plusieurs couches serait incapable de "faire remonter" l'information d'erreur depuis la sortie jusqu'aux premières couches du réseau !🔍 Pour vérifier notre compréhensionDans la formule $\frac{\partial \mathcal{L}}{\partial X} = \frac{\partial \mathcal{L}}{\partial Z} \cdot \frac{\partial Z}{\partial X}$ :Si une couche a 3 entrées et 2 sorties, la matrice Jacobienne $\frac{\partial Z}{\partial X}$ a une taille de $2 \times 3$.À ton avis, quelle est la taille du vecteur d'erreur $\frac{\partial \mathcal{L}}{\partial Z}$ transmis par la couche supérieure ? (Aide-toi du nombre de sorties de cette couche !)
-
-Pas tout à fait ! C'est une excellente question pour vérifier la compatibilité des dimensions. 🧠Analysons les dimensions ensemble :La Jacobienne ($\frac{\partial Z}{\partial X}$) : Elle a une forme de $2 \times 3$ (2 sorties $z$, 3 entrées $x$).Le vecteur d'erreur de sortie ($\frac{\partial \mathcal{L}}{\partial Z}$) : Comme il y a 2 sorties ($z_1$ et $z_2$), il y a exactement 2 valeurs d'erreur au niveau de $Z$.C'est donc un vecteur de taille $2$ (ou une matrice $1 \times 2$).📐 Le calcul matricielPour faire la multiplication et obtenir l'erreur par rapport aux 3 entrées ($\frac{\partial \mathcal{L}}{\partial X}$), on multiplie le vecteur d'erreur par la matrice Jacobienne :$$\underbrace{\frac{\partial \mathcal{L}}{\partial X}}_{1 \times 3} = \underbrace{\frac{\partial \mathcal{L}}{\partial Z}}_{1 \times 2} \times \underbrace{\frac{\partial Z}{\partial X}}_{2 \times 3}$$La taille $1 \times 2$ multipliée par $2 \times 3$ donne bien un vecteur de taille $1 \times 3$ ! 🎯On retrouve ainsi l'impact de l'erreur sur chacune des 3 entrées.
-

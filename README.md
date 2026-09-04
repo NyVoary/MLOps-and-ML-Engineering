@@ -62,7 +62,7 @@ The full checklist below mirrors the [roadmap.sh](https://roadmap.sh/ai/roadmap/
 - [ ] 01.1 [Multivariable Calculus](01-mathematical-foundations/01-multivariable-calculus/README.md)
   - [x] Partial Derivatives
   - [x] Gradient Vectors
-  - [ ] Jacobian Matrices
+  - [x] Jacobian Matrices
   - [ ] Hessian Matrices
   - [ ] Lagrangian Multipliers
   - [ ] Taylor Series Expansion
