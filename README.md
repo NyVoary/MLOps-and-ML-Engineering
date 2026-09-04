@@ -15,28 +15,37 @@ The goal isn't to build a library or a finished product, but to **keep a written
 
 ## 🗂️ Repository organization
 
-The structure directly follows the roadmap, with a simple convention:
+The roadmap has three levels — **Section** → **Sub-section** → **Topic** (e.g. *Mathematical Foundations* → *Multivariable Calculus* → *Jacobian Matrices*). The folder structure only mirrors the first two levels; individual topics live **as sections inside the sub-section's `README.md`**, not as their own subfolders:
 
 - Each **major roadmap section** becomes a **numbered folder** at the root (e.g. `01-mathematical-foundations`).
-- Each **sub-topic / step** within that section becomes a **numbered subfolder** inside it (e.g. `01-multivariable-calculus`).
+- Each **roadmap sub-section** becomes a **numbered subfolder** inside it (e.g. `01-multivariable-calculus`).
+- Each **individual topic** of that sub-section (e.g. Partial Derivatives, Gradient Vectors, Jacobian Matrices, Hessian Matrices...) becomes a **new section in the same `README.md`**, plus its own script(s) when it warrants code.
 
 ```
 01-mathematical-foundations/
-└── 01-multivariable-calculus/
-    ├── README.md                              # Summary sheet: theory, formulas, pseudo-code
-    ├── partial_derivatives.py                 # "From scratch" implementation
+└── 01-multivariable-calculus/            # one folder per roadmap sub-section
+    ├── README.md                          # all topics of this sub-section, one section each:
+    │                                       #   1. Partial Derivatives
+    │                                       #   2. Gradient Vectors
+    │                                       #   3. Jacobian Matrices        (added later)
+    │                                       #   4. Hessian Matrices         (added later)
+    │                                       #   ...
+    ├── partial_derivatives.py             # "from scratch" implementation
     ├── partial_derivatives_and_gradients.py
-    └── interactive_partial_derivatives.py     # Comparison with a standard library (SymPy/NumPy)
+    ├── interactive_partial_derivatives.py # comparison with a standard library (SymPy/NumPy)
+    └── jacobian_matrices.py               # (added later, alongside its README section)
 02-<next-section>/
-└── 01-<first-sub-topic>/
+└── 01-<first-sub-section>/
     └── README.md
 ...
 ```
 
+This keeps one folder per sub-section instead of one per leaf topic — less nesting, and topics that are naturally studied together (like Partial Derivatives and Gradient Vectors) stay next to each other.
+
 ## 📄 What goes in each subfolder?
 
 **1. A summary sheet (`README.md`)**
-A short, synthetic sheet summarizing the mathematical or algorithmic intuition behind the concept: definitions, notation, a worked example, pseudo-code. The goal is to be able to re-read it later and understand the concept without re-deriving everything.
+A short, synthetic sheet summarizing the mathematical or algorithmic intuition behind each topic of the sub-section: definitions, notation, a worked example, pseudo-code. The goal is to be able to re-read it later and understand the concept without re-deriving everything.
 
 **2. Implementation scripts (`.py` or `.ipynb`)**
 
@@ -45,10 +54,12 @@ A short, synthetic sheet summarizing the mathematical or algorithmic intuition b
 
 ## ✅ Progress tracker
 
-- [x] **01. Mathematical Foundations**
-  - [x] [01.1 Multivariable Calculus](01-mathematical-foundations/01-multivariable-calculus/README.md) — partial derivatives, gradient, finite differences
+- [ ] **01. Mathematical Foundations**
+  - [ ] 01.1 [Multivariable Calculus](01-mathematical-foundations/01-multivariable-calculus/README.md)
+    - [x] Partial Derivatives
+    - [x] Gradient Vectors
 
-*(Check off items as you progress through the roadmap; each sub-topic links to its folder's README.)*
+*(Check off items as you progress through the roadmap; each sub-section links to its folder's README, where individual topics get their own section. New topics/sub-sections are added here as they're covered.)*
 
 ## 🛠️ Code conventions
 
