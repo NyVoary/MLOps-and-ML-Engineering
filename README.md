@@ -15,37 +15,40 @@ The goal isn't to build a library or a finished product, but to **keep a written
 
 ## 🗂️ Repository organization
 
-The roadmap has three levels — **Section** → **Sub-section** → **Topic** (e.g. *Mathematical Foundations* → *Multivariable Calculus* → *Jacobian Matrices*). The folder structure only mirrors the first two levels; individual topics live **as sections inside the sub-section's `README.md`**, not as their own subfolders:
+The roadmap has three levels — **Section** → **Sub-section** → **Topic** (e.g. *Mathematical Foundations* → *Multivariable Calculus* → *Jacobian Matrices*). The folder structure mirrors all three levels, one folder each, so every topic gets its own `README.md` and its own script(s):
 
 - Each **major roadmap section** becomes a **numbered folder** at the root (e.g. `01-mathematical-foundations`).
-- Each **roadmap sub-section** becomes a **numbered subfolder** inside it (e.g. `01-multivariable-calculus`).
-- Each **individual topic** of that sub-section (e.g. Partial Derivatives, Gradient Vectors, Jacobian Matrices, Hessian Matrices...) becomes a **new section in the same `README.md`**, plus its own script(s) when it warrants code.
+- Each **roadmap sub-section** becomes a **numbered subfolder** inside it (e.g. `01-multivariable-calculus`), with its own `README.md` acting as an index/overview for that sub-section plus any conventions shared across its topics.
+- Each **individual topic** of that sub-section (e.g. Partial Derivatives, Gradient Vectors, Jacobian Matrices...) becomes its own **numbered subfolder** inside the sub-section, with its own `README.md` (theory, worked example, pseudo-code) and implementation script(s).
 
 ```
 01-mathematical-foundations/
 └── 01-multivariable-calculus/            # one folder per roadmap sub-section
-    ├── README.md                          # all topics of this sub-section, one section each:
-    │                                       #   1. Partial Derivatives
-    │                                       #   2. Gradient Vectors
-    │                                       #   3. Jacobian Matrices        (added later)
-    │                                       #   4. Hessian Matrices         (added later)
-    │                                       #   ...
-    ├── partial_derivatives.py             # "from scratch" implementation
-    ├── partial_derivatives_and_gradients.py
-    ├── interactive_partial_derivatives.py # comparison with a standard library (SymPy/NumPy)
-    └── jacobian_matrices.py               # (added later, alongside its README section)
+    ├── README.md                          # index: overview + shared conventions
+    ├── 01-partial-derivatives/
+    │   ├── README.md
+    │   ├── partial_derivatives.py         # "from scratch" implementation
+    │   └── interactive_partial_derivatives.py  # comparison with a standard library (SymPy/NumPy)
+    ├── 02-gradient-vector/
+    │   ├── README.md
+    │   └── gradient_vector.py
+    └── 03-jacobian-matrix/
+        ├── README.md
+        └── jacobian_matrix.py
 02-<next-section>/
 └── 01-<first-sub-section>/
-    └── README.md
+    ├── README.md
+    └── 01-<first-topic>/
+        └── README.md
 ...
 ```
 
-This keeps one folder per sub-section instead of one per leaf topic — less nesting, and topics that are naturally studied together (like Partial Derivatives and Gradient Vectors) stay next to each other.
+Each topic README links back to its sub-section index and to its sibling topics, so the whole sub-section is browsable both top-down (from the index) and sequentially (topic to topic).
 
-## 📄 What goes in each subfolder?
+## 📄 What goes in each topic folder?
 
 **1. A summary sheet (`README.md`)**
-A short, synthetic sheet summarizing the mathematical or algorithmic intuition behind each topic of the sub-section: definitions, notation, a worked example, pseudo-code. The goal is to be able to re-read it later and understand the concept without re-deriving everything.
+A short, synthetic sheet summarizing the mathematical or algorithmic intuition behind the topic: definitions, notation, a worked example, pseudo-code. The goal is to be able to re-read it later and understand the concept without re-deriving everything.
 
 **2. Implementation scripts (`.py` or `.ipynb`)**
 
@@ -60,9 +63,9 @@ The full checklist below mirrors the [roadmap.sh](https://roadmap.sh/ai/roadmap/
 <summary><b>01. Mathematical Foundations</b></summary>
 
 - [ ] 01.1 [Multivariable Calculus](01-mathematical-foundations/01-multivariable-calculus/README.md)
-  - [x] Partial Derivatives
-  - [x] Gradient Vectors
-  - [x] Jacobian Matrices
+  - [x] [Partial Derivatives](01-mathematical-foundations/01-multivariable-calculus/01-partial-derivatives/README.md)
+  - [x] [Gradient Vectors](01-mathematical-foundations/01-multivariable-calculus/02-gradient-vector/README.md)
+  - [x] [Jacobian Matrices](01-mathematical-foundations/01-multivariable-calculus/03-jacobian-matrix/README.md)
   - [ ] Hessian Matrices
   - [ ] Lagrangian Multipliers
   - [ ] Taylor Series Expansion
