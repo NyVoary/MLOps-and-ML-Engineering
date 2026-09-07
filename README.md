@@ -445,7 +445,7 @@ The full checklist below mirrors the [roadmap.sh](https://roadmap.sh/ai/roadmap/
 
 </details>
 
-*(Check off items as you progress through the roadmap; each sub-section links to its folder's README once one exists, where individual topics get their own section.)*
+*(Check off items as I progress through the roadmap; each sub-section links to its folder's README once one exists, where individual topics get their own section.)*
 
 ## 🛠️ Code conventions
 
