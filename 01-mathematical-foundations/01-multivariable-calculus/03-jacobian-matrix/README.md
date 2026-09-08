@@ -2,7 +2,7 @@
 
 ## From gradient to Jacobian
 
-So far, we've worked with functions that take several inputs $(x, y)$ but produce a single scalar output: $f(x, y) \in \mathbb{R}$ - see [Partial Derivatives](../01-partial-derivatives/README.md) and [the Gradient Vector](../02-gradient-vector/README.md). The gradient gathers all the partial derivatives into a single vector.
+So far, I've worked with functions that take several inputs $(x, y)$ but produce a single scalar output: $f(x, y) \in \mathbb{R}$ — see [Partial Derivatives](../01-partial-derivatives/README.md) and [the Gradient Vector](../02-gradient-vector/README.md). The gradient gathers all the partial derivatives into a single vector.
 
 The **Jacobian matrix** is simply the generalization of the gradient for functions with several inputs **and** several outputs:
 
@@ -14,7 +14,7 @@ $$\mathbf{J} = \begin{pmatrix} \dfrac{\partial f_1}{\partial x} & \dfrac{\partia
 
 ## Worked example
 
-Consider a function $\mathbf{F}$ that takes a 2D point $(x, y)$ as input and returns a 2D vector as output:
+I take a function $\mathbf{F}$ that takes a 2D point $(x, y)$ as input and returns a 2D vector as output:
 
 $$\mathbf{F}(x, y) = \begin{pmatrix} f_1(x, y) \\ f_2(x, y) \end{pmatrix} = \begin{pmatrix} x^2 y \\ x + 3y \end{pmatrix}$$
 
@@ -25,7 +25,7 @@ $$\mathbf{F}(x, y) = \begin{pmatrix} f_1(x, y) \\ f_2(x, y) \end{pmatrix} = \beg
 - $\dfrac{\partial f_2}{\partial x} = 1$
 - $\dfrac{\partial f_2}{\partial y} = 3$
 
-Which gives the symbolic Jacobian matrix:
+Which gives me the symbolic Jacobian matrix:
 
 $$J(x, y) = \begin{pmatrix} 2xy & x^2 \\ 1 & 3 \end{pmatrix}$$
 
@@ -36,7 +36,7 @@ $$J(x, y) = \begin{pmatrix} 2xy & x^2 \\ 1 & 3 \end{pmatrix}$$
 
 $$J(2, 3) = \begin{pmatrix} 12 & 4 \\ 1 & 3 \end{pmatrix}$$
 
-> 💡 **Reading the matrix**: row 1 corresponds to output $f_1$, column 1 corresponds to input $x$. The entry $J_{11} = 12$ is the partial derivative $\dfrac{\partial f_1}{\partial x}$ - it tells us $f_1$'s *sensitivity* to $x$. If we nudge $x$ by $+0.01$ (keeping $y = 3$ fixed), $f_1$ increases by roughly $12 \times 0.01 = +0.12$: each entry of the Jacobian is a local rate of change, exactly like a single partial derivative.
+> 💡 **Reading the matrix**: row 1 corresponds to output $f_1$, column 1 corresponds to input $x$. The entry $J_{11} = 12$ is the partial derivative $\dfrac{\partial f_1}{\partial x}$ — it tells me $f_1$'s *sensitivity* to $x$. If I nudge $x$ by $+0.01$ (keeping $y = 3$ fixed), $f_1$ increases by roughly $12 \times 0.01 = +0.12$: each entry of the Jacobian is a local rate of change, exactly like a single partial derivative.
 
 ## General shape rule
 
@@ -46,16 +46,16 @@ For example, with 3 input variables and 2 output functions:
 
 $$J = \begin{pmatrix} \dfrac{\partial f_1}{\partial x_1} & \dfrac{\partial f_1}{\partial x_2} & \dfrac{\partial f_1}{\partial x_3} \\[6pt] \dfrac{\partial f_2}{\partial x_1} & \dfrac{\partial f_2}{\partial x_2} & \dfrac{\partial f_2}{\partial x_3} \end{pmatrix} \quad (2 \times 3 \text{ matrix})$$
 
-## Two ways to read the Jacobian
+## Two ways I read the Jacobian
 
-The same object is used very differently depending on the field:
+I use the same object very differently depending on the field:
 
 - **Geometry / analysis** 📐: the Jacobian measures how a transformation deforms space (change of variables, volume computation via the Jacobian determinant, surface deformation). More formally, it's the linear map that gives the best local approximation of a differentiable function between two vector spaces.
-- **Machine Learning** 🤖: the Jacobian measures how sensitive each output of a model is to each input. If a neural network layer takes a 3D input vector $X$ and produces a 2D output vector $Y$, the Jacobian matrix contains every rate of change needed to propagate the error backward (**backpropagation**).
+- **Machine Learning** 🤖: the Jacobian measures how sensitive each output of a model is to each input. If a neural network layer takes a 3D input vector $X$ and produces a 2D output vector $Y$, the Jacobian matrix contains every rate of change I need to propagate the error backward (**backpropagation**).
 
 ## The Jacobian inside a neural network layer
 
-Consider a dense (fully-connected) layer with 3 inputs ($x_1, x_2, x_3$) and 2 output neurons ($z_1, z_2$), each computed as a weighted sum plus a bias:
+I take a dense (fully-connected) layer with 3 inputs ($x_1, x_2, x_3$) and 2 output neurons ($z_1, z_2$), each computed as a weighted sum plus a bias:
 
 $$z_1 = w_{11}x_1 + w_{12}x_2 + w_{13}x_3 + b_1$$
 $$z_2 = w_{21}x_1 + w_{22}x_2 + w_{23}x_3 + b_2$$
@@ -66,7 +66,7 @@ $$J = \begin{pmatrix} \dfrac{\partial z_1}{\partial x_1} & \dfrac{\partial z_1}{
 
 **Key takeaway**: for a linear layer $Z = WX + B$, the Jacobian with respect to the input $X$ is nothing but the weight matrix $W$ itself. This is why libraries like PyTorch and TensorFlow are, under the hood, continuously multiplying Jacobian matrices together (via the chain rule) to propagate the error from layer to layer.
 
-## Backpropagation & Gradient Descent - putting it all together 🔄
+## Backpropagation & Gradient Descent — putting it all together 🔄
 
 ### The learning cycle
 
@@ -78,7 +78,7 @@ Training a neural network loops through three phases:
 
 ### The chain rule and the Jacobian
 
-During backpropagation, we need the gradient of the loss $\mathcal{L}$ with respect to every weight $w$ and bias $b$. For a simple chain $x \to (\text{neuron}, w) \to \hat{y} \to \mathcal{L}$, the chain rule multiplies local sensitivities:
+During backpropagation, I need the gradient of the loss $\mathcal{L}$ with respect to every weight $w$ and bias $b$. For a simple chain $x \to (\text{neuron}, w) \to \hat{y} \to \mathcal{L}$, the chain rule multiplies local sensitivities:
 
 $$\frac{\partial \mathcal{L}}{\partial w} = \frac{\partial \mathcal{L}}{\partial \hat{y}} \times \frac{\partial \hat{y}}{\partial w}$$
 
@@ -86,15 +86,15 @@ In a deep network with several layers and neurons, these local-sensitivity compu
 
 $$\underbrace{\frac{\partial \mathcal{L}}{\partial X}}_{1 \times 3} = \underbrace{\frac{\partial \mathcal{L}}{\partial Z}}_{1 \times 2} \times \underbrace{\frac{\partial Z}{\partial X}}_{2 \times 3}$$
 
-redistributes the output error back onto each of the 3 inputs - this is exactly how the error "climbs back" through every layer of the network.
+redistributes the output error back onto each of the 3 inputs — this is exactly how the error "climbs back" through every layer of the network.
 
 ### Gradient Descent recap
 
-**Gradient Descent** is the optimization algorithm that uses these gradients to actually minimize the loss - like descending a mountain in the fog 🌫️: at each step, you look at the slope under your feet and step in the steepest downward direction.
+**Gradient Descent** is the optimization algorithm that uses these gradients to actually minimize the loss — like descending a mountain in the fog 🌫️: at each step, I look at the slope under my feet and step in the steepest downward direction.
 
 | Component | Role |
 |---|---|
-| Cost function $\mathcal{L}$ | Measures the model's overall error; the quantity we want to minimize. |
+| Cost function $\mathcal{L}$ | Measures the model's overall error; the quantity I want to minimize. |
 | Gradient $\nabla \mathcal{L}$ | Vector of all partial derivatives of the loss; always points toward the steepest **increase**. |
 | Learning rate $\eta$ | Small positive number (e.g. $0.01$) controlling the step size at each iteration. |
 
@@ -102,7 +102,7 @@ Update rule for a weight $w$:
 
 $$w_{\text{new}} = w_{\text{current}} - \eta \cdot \frac{\partial \mathcal{L}}{\partial w}$$
 
-The **minus sign** is crucial: since the gradient points where the function increases, we step in the opposite direction to decrease it. For example, if $\dfrac{\partial \mathcal{L}}{\partial w} = +5$ (increasing $w$ increases the error), the update rule *decreases* $w$ - exactly what we want.
+The **minus sign** is crucial: since the gradient points where the function increases, I step in the opposite direction to decrease it. For example, if $\dfrac{\partial \mathcal{L}}{\partial w} = +5$ (increasing $w$ increases the error), the update rule *decreases* $w$ — exactly what I want.
 
 **Algorithm outline:**
 
@@ -112,13 +112,22 @@ The **minus sign** is crucial: since the gradient points where the function incr
 4. Update every weight using the rule above.
 5. Repeat steps 2–4 until the error stops decreasing (convergence).
 
+## Visualization 📊
+
+Since $\mathbf{F}: \mathbb{R}^2 \to \mathbb{R}^2$ isn't a single surface I can plot, I visualized what the Jacobian actually *means*: how $F$ deforms space. I mapped a small grid around $(2, 3)$ through $F$ — the grid comes out curved (F is nonlinear) — and overlaid the straight-line approximation predicted by the Jacobian. They match closely right at the evaluation point, then drift apart: that's the "local" in "local linear approximation".
+
+![Input grid vs. its curved image under F, with the Jacobian's straight-line approximation overlaid](jacobian_matrix_plot.png)
+
+*Generated by [`plot_jacobian_matrix.py`](plot_jacobian_matrix.py).*
+
 ## Scripts in this folder
 
-- [`jacobian_matrix.py`](jacobian_matrix.py) - `compute_jacobian` via centered finite differences, demonstrated on the worked example above ($\mathbb{R}^2 \to \mathbb{R}^2$) and on a dense neural network layer ($\mathbb{R}^3 \to \mathbb{R}^2$), confirming that the Jacobian of a linear layer equals its weight matrix $W$.
+- [`jacobian_matrix.py`](jacobian_matrix.py) — `compute_jacobian` via centered finite differences, demonstrated on the worked example above ($\mathbb{R}^2 \to \mathbb{R}^2$) and on a dense neural network layer ($\mathbb{R}^3 \to \mathbb{R}^2$), confirming that the Jacobian of a linear layer equals its weight matrix $W$.
+- [`plot_jacobian_matrix.py`](plot_jacobian_matrix.py) — the visualization above.
 
 ## Pseudo-code: Jacobian Matrix (Central Difference)
 
-```
+```text
 ALGORITHM: Calculate Jacobian Matrix
 
 INPUT:
@@ -154,4 +163,4 @@ BEGIN
 END
 ```
 
-⬅️ Back to [Multivariable Calculus overview](../README.md) · Previous: [Gradient Vector](../02-gradient-vector/README.md)
+⬅️ Back to [Multivariable Calculus overview](../README.md) · Previous: [Gradient Vector](../02-gradient-vector/README.md) · Next: [Hessian Matrix](../04-hessian-matrix/README.md)
