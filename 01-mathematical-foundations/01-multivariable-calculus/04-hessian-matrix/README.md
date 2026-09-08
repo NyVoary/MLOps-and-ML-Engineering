@@ -1,45 +1,134 @@
-La Matrice Hessienne en bref 🧠Si la Matrice Jacobienne regroupait toutes les dérivées premières d'une fonction (taux de variation / pente), la Matrice Hessienne regroupe toutes les dérivées secondes (la courbure de la fonction).1. Pour quel type de fonction ?Elle s'applique aux fonctions à plusieurs entrées $(x_1, x_2, \dots, x_n)$ mais qui produisent une seule sortie scalaire $f(\mathbf{x}) \in \mathbb{R}$.
-(C'est exactement le cas de nos fonctions de perte/Loss en Machine Learning !)2. Définition et StructurePour une fonction $f(x, y)$, sa matrice Hessienne $H$ s'écrit :$$H = \begin{pmatrix} \frac{\partial^2 f}{\partial x^2} & \frac{\partial^2 f}{\partial x \partial y} \\ \frac{\partial^2 f}{\partial y \partial x} & \frac{\partial^2 f}{\partial y^2} \end{pmatrix}$$Lignes & Colonnes : Pour une fonction de $n$ variables d'entrée, la Hessienne est une matrice carrée de taille $n \times n$.Théorème de Schwarz (Symphonie de la symétrie) : Si les dérivées secondes sont continues, les dérivées croisées sont égales : $\frac{\partial^2 f}{\partial x \partial y} = \frac{\partial^2 f}{\partial y \partial x}$. La matrice Hessienne est donc symétrique ($H = H^T$).Step 1: L'Exemple Mathématique Simple 🧮Prenons la fonction suivante à 2 variables :
-$$f(x, y) = 3x^2y + 2y^3 - 5x$$1. Dérivées premières (Gradient)$\frac{\partial f}{\partial x} = 6xy - 5$$\frac{\partial f}{\partial y} = 3x^2 + 6y^2$2. Dérivées secondes (Hessienne)Calculons chaque terme de notre matrice $H$ :$\frac{\partial^2 f}{\partial x^2} = \frac{\partial}{\partial x}(6xy - 5) = 6y$$\frac{\partial^2 f}{\partial x \partial y} = \frac{\partial}{\partial y}(6xy - 5) = 6x$$\frac{\partial^2 f}{\partial y \partial x} = \frac{\partial}{\partial x}(3x^2 + 6y^2) = 6x$$\frac{\partial^2 f}{\partial y^2} = \frac{\partial}{\partial y}(3x^2 + 6y^2) = 12y$Ce qui donne la matrice Hessienne symbolique :
-$$H(x, y) = \begin{pmatrix} 6y & 6x \\ 6x & 12y \end{pmatrix}$$3. Évaluation au point $(x = 1, y = 2)$En remplaçant $x=1$ et $y=2$ :
-$$H(1, 2) = \begin{pmatrix} 12 & 6 \\ 6 & 24 \end{pmatrix}$$Petite question pour vérifier l'intuition 💡Pour une fonction de coût en Machine Learning qui prend en entrée 5 variables (poids), quelle sera la taille (nombre de lignes et de colonnes) de sa matrice Hessienne ?
+# The Hessian Matrix 🧠
 
-Visualisons la Matrice Hessienne grâce à une métaphore géographique simple : le relief d'un paysage 🏔️.🏔️ L'Analogie du Relief : Bol vs Col de MontagneImaginons que nous mesurons l'altitude (notre fonction de perte $\mathcal{L}$) en fonction de notre position $(x, y)$ sur un terrain (nos paramètres/poids) :Si nous sommes au fond d'une vallée en forme de bol 🥣 (Un Minimum) :La pente est nulle ($\nabla \mathcal{L} = \mathbf{0}$).Peu importe la direction dans laquelle nous faisons un pas (en $x$ ou en $y$), la pente remonte.La courbure est positive dans toutes les directions. La Hessienne nous indique que nous sommes sur un minimum local.Si nous sommes sur un col de montagne 🐴 (Un Point Selle / Saddle Point) :La pente est aussi nulle ($\nabla \mathcal{L} = \mathbf{0}$) ! Le gradient seul ne permet pas de faire la différence avec un minimum.Mais en regardant la courbure grâce à la Hessienne :Si on marche le long de la crête (axe $x$), le terrain descend (courbure négative).Si on marche à travers le col (axe $y$), le terrain remonte (courbure positive).La Hessienne nous avertit : "Attention, c'est un point selle, pas un vrai minimum !"🏎️ À quoi sert la Hessienne en Machine Learning ?Dans l'optimisation par Descente de Gradient classique, nous avançons à aveugle avec une taille de pas fixe ($\eta$). Si la pente est très raide dans une direction et très plate dans une autre (une vallée étroite), la descente de gradient va osciller d'un bord à l'autre sans avancer vers le fond.C'est là qu'intervient l'optimisation de second ordre (comme la Méthode de Newton) :$$\Delta \mathbf{x} = - H^{-1} \nabla \mathcal{L}$$La Hessienne ($H$) mesure la courbure dans chaque direction.En prenant son inverse ($H^{-1}$), l'algorithme adapte automatiquement la taille du pas :📈 Fortes courbures : Il fait de petits pas pour éviter de dépasser le fond de la vallée.📉 Faibles courbures : Il fait de grands pas pour traverser rapidement les zones plates.L'algorithme avance ainsi directement vers le minimum en très peu d'étapes !💡 Un petit test pour vérifier la logiqueAu fond d'une vallée (un minimum parfait), si la courbure est positive dans toutes les directions, que peux-tu dire du signe des valeurs sur la diagonale de la matrice Hessienne ?(Indice : rappelle-toi que la diagonale contient les dérivées secondes pures $\frac{\partial^2 f}{\partial x^2}$ et $\frac{\partial^2 f}{\partial y^2}$ !)
+If the [Jacobian matrix](../03-jacobian-matrix/README.md) gathers all the **first** derivatives of a function (its rate of change, its slope), the **Hessian matrix** gathers all its **second** derivatives — the *curvature* of the function.
 
-💡 Pour revenir à notre petite question d'intuition :Sur la diagonale d'une matrice Hessienne, on retrouve les dérivées secondes pures pour chaque variable ($\frac{\partial^2 f}{\partial x^2}$, $\frac{\partial^2 f}{\partial y^2}$, etc.).Si nous sommes au fond d'un bol (un vrai minimum local où le terrain remonte dans toutes les directions) :À ton avis, quel doit être le signe (positif ou négatif) des termes sur la diagonale de la matrice Hessienne ?
+## What kind of function is this for?
 
-C'est piège, mais c'est bien POSITIF ! 📈Voyons ensemble pourquoi avec un petit schéma visuel !🥣 La forme du bol (Minimum)Pour comprendre le signe de la dérivée seconde, rappelons-nous ce qu'est une dérivée :La dérivée première ($\frac{\partial f}{\partial x}$) nous donne la pente.La dérivée seconde ($\frac{\partial^2 f}{\partial x^2}$) mesure comment la pente change quand on avance de gauche à droite.Imaginons qu'on marche au fond d'un bol 🥣 de gauche à droite ($x$ augmente) :À gauche du fond (en descendant) : La pente est négative (ex: $-5$).Tout au fond (le minimum) : La pente devient nulle ($0$).À droite du fond (en remontant) : La pente devient positive (ex: $+5$).📈 La pente augmente !En marchant de gauche à droite, la pente est passée de $-5 \to 0 \to +5$.La pente a donc augmenté ! Et comme la dérivée seconde mesure la variation de la pente, si la pente augmente, la dérivée seconde doit être positive ($\frac{\partial^2 f}{\partial x^2} > 0$).💡 Le récapitulatif visuelForme du terrainTendance de la penteSigne de la Dérivée Seconde (Diagonale)🥣 Bol / Creux (Minimum)La pente augmente (de négative à positive)POSITIF ($+$) 📈⛰️ Dôme / Sommet (Maximum)La pente diminue (de positive à négative)NÉGATIF ($-$) 📉
+The Hessian applies to functions with several inputs $(x_1, x_2, \dots, x_n)$ that produce a single scalar output $f(\mathbf{x}) \in \mathbb{R}$ — exactly the shape of the loss functions I use in Machine Learning.
 
-Rappelons-nous les deux cas pour les fonctions de perte $\mathcal{L}$ :🥣 Minimum (Bol) : La pente augmente $\rightarrow$ Dérivée seconde positive ($+$).⛰️ Maximum (Sommet) : La pente diminue $\rightarrow$ Dérivée seconde négative ($-$).
+## Definition and structure
 
-ALGORITHME: Calculate Hessian Matrix (Central Difference)
+For a function $f(x, y)$, the Hessian matrix $H$ is:
 
-ENTRÉES:
-    - f: fonction scalaire prenant un vecteur de taille n et renvoyant un réel
-    - point: vecteur [x1, x2, ..., xn] de taille n
-    - h: pas de variation (par défaut = 1e-4)
+$$H = \begin{pmatrix} \dfrac{\partial^2 f}{\partial x^2} & \dfrac{\partial^2 f}{\partial x \partial y} \\[6pt] \dfrac{\partial^2 f}{\partial y \partial x} & \dfrac{\partial^2 f}{\partial y^2} \end{pmatrix}$$
 
-SORTIE:
-    - H: matrice Hessienne carrée de taille (n x n)
+- **Rows & columns**: for a function of $n$ input variables, the Hessian is a **square** $n \times n$ matrix.
+- **Schwarz's theorem (the symmetry of it all)**: if the second derivatives are continuous, the mixed (cross) derivatives are equal: $\dfrac{\partial^2 f}{\partial x \partial y} = \dfrac{\partial^2 f}{\partial y \partial x}$. So the Hessian matrix is always **symmetric** ($H = H^T$).
 
-DÉBUT
-    1. Soit n = longueur(point)
-    2. Initialiser H comme une matrice n x n remplie de zéros
-    
-    3. POUR chaque ligne 'i' de 0 à n-1 FAIRE:
-           POUR chaque colonne 'j' de 0 à n-1 FAIRE:
-               
-               SI i == j ALORS (Dérivée seconde pure)
-                   // Formule de la différence centrée pour f''(x):
+## Worked example
+
+I take the following function of 2 variables:
+
+$$f(x, y) = 3x^2y + 2y^3 - 5x$$
+
+**First derivatives (gradient):**
+
+- $\dfrac{\partial f}{\partial x} = 6xy - 5$
+- $\dfrac{\partial f}{\partial y} = 3x^2 + 6y^2$
+
+**Second derivatives (Hessian)**, computed one at a time:
+
+- $\dfrac{\partial^2 f}{\partial x^2} = \dfrac{\partial}{\partial x}(6xy - 5) = 6y$
+- $\dfrac{\partial^2 f}{\partial x \partial y} = \dfrac{\partial}{\partial y}(6xy - 5) = 6x$
+- $\dfrac{\partial^2 f}{\partial y \partial x} = \dfrac{\partial}{\partial x}(3x^2 + 6y^2) = 6x$
+- $\dfrac{\partial^2 f}{\partial y^2} = \dfrac{\partial}{\partial y}(3x^2 + 6y^2) = 12y$
+
+Which gives the symbolic Hessian matrix:
+
+$$H(x, y) = \begin{pmatrix} 6y & 6x \\ 6x & 12y \end{pmatrix}$$
+
+**Evaluating at the point** $(x = 1, y = 2)$:
+
+$$H(1, 2) = \begin{pmatrix} 12 & 6 \\ 6 & 24 \end{pmatrix}$$
+
+> 💡 **Quick check I gave myself**: for a Machine Learning cost function taking 5 input variables (weights), what shape would its Hessian matrix have? — $5 \times 5$, one row/column per weight, since the Hessian of an $n$-variable function is always $n \times n$.
+
+## Reading curvature: bowl vs. mountain pass
+
+The easiest way I found to picture the Hessian is a geographical metaphor: the relief of a landscape 🏔️. Imagine measuring an altitude (my loss function $\mathcal{L}$) as a function of my position $(x, y)$ on a terrain (my parameters/weights):
+
+- **At the bottom of a bowl-shaped valley 🥣 (a minimum)**: the slope is zero ($\nabla \mathcal{L} = \mathbf{0}$), and no matter which direction I step in, the terrain goes back up. The curvature is positive in every direction — the Hessian tells me I'm on a local minimum.
+- **On a mountain pass 🐴 (a saddle point)**: the slope is also zero! The gradient alone can't tell the difference from a minimum. But looking at the curvature via the Hessian: walking along the ridge (x-axis), the terrain goes down (negative curvature); walking across the pass (y-axis), it goes up (positive curvature). The Hessian warns me: *"careful, this is a saddle point, not a real minimum!"*
+
+I checked this visually below — see [Visualization](#visualization-📊).
+
+## Why the Hessian matters in Machine Learning
+
+Plain Gradient Descent walks blindly with a fixed step size ($\eta$). If the slope is very steep in one direction and very flat in another (a narrow valley), gradient descent oscillates from one wall to the other instead of making progress toward the bottom.
+
+This is where **second-order optimization** (like Newton's Method) comes in:
+
+$$\Delta \mathbf{x} = - H^{-1} \nabla \mathcal{L}$$
+
+- The Hessian ($H$) measures the curvature in every direction.
+- By taking its inverse ($H^{-1}$), the algorithm automatically adapts the step size:
+  - 📈 **Steep curvature**: it takes small steps to avoid overshooting the bottom of the valley.
+  - 📉 **Flat curvature**: it takes large steps to cross flat regions quickly.
+
+The algorithm then heads straight for the minimum in very few steps!
+
+### Reading the sign of the diagonal
+
+Here's the logic I walked through to convince myself of the signs on the diagonal:
+
+- The first derivative ($\partial f / \partial x$) gives the slope.
+- The second derivative ($\partial^2 f / \partial x^2$) measures how that slope changes as I move left to right.
+- Walking through the bottom of a bowl 🥣 left to right ($x$ increasing): the slope goes from negative (going down) → zero (the bottom) → positive (going up). **The slope increases** — so the second derivative is **positive**.
+- Walking over the top of a dome ⛰️ (a maximum): the slope goes from positive → zero → negative. **The slope decreases** — so the second derivative is **negative**.
+
+| Shape of the terrain | Slope trend | Sign of the second derivative (diagonal) |
+|---|---|---|
+| 🥣 Bowl / valley (minimum) | increases (negative → positive) | **POSITIVE** (+) 📈 |
+| ⛰️ Dome / peak (maximum) | decreases (positive → negative) | **NEGATIVE** (−) 📉 |
+
+So for a loss function $\mathcal{L}$: a minimum (bowl) means a positive second derivative; a maximum (dome) means a negative one — and a saddle point means the diagonal terms disagree in sign.
+
+## Visualization 📊
+
+I plotted a bowl ($f = x^2 + y^2$) next to a saddle ($f = x^2 - y^2$) — both have a zero gradient at the origin, but their Hessian eigenvalues tell them apart (both positive for the bowl, mixed signs for the saddle):
+
+![Bowl vs. saddle point, told apart by the Hessian's eigenvalues](hessian_matrix_plot.png)
+
+*Generated by [`plot_hessian_matrix.py`](plot_hessian_matrix.py).*
+
+## Scripts in this folder
+
+- [`hessian_matrix.py`](hessian_matrix.py) — `compute_hessian` via centered finite differences (pure second derivatives on the diagonal, 4-point mixed derivatives off it), validated against the hand-computed matrix and checked for symmetry.
+- [`plot_hessian_matrix.py`](plot_hessian_matrix.py) — 3D surfaces of a bowl and a saddle, annotated with their Hessian eigenvalues.
+
+## Pseudo-code: Hessian Matrix (Central Difference)
+
+```
+ALGORITHM: Calculate Hessian Matrix
+
+INPUT:
+    - f: scalar function taking a vector of size n and returning a real number
+    - point: vector [x1, x2, ..., xn] of size n
+    - h: step size (default = 1e-4)
+
+OUTPUT:
+    - H: square Hessian matrix of size (n x n)
+
+BEGIN
+    1. Let n = length(point)
+    2. Initialize H as an n x n matrix filled with zeros
+
+    3. FOR each row 'i' from 0 to n - 1 DO:
+           FOR each column 'j' from 0 to n - 1 DO:
+
+               IF i == j THEN (pure second derivative)
+                   // Centered difference formula for f''(x):
                    // (f(x+h) - 2*f(x) + f(x-h)) / (h^2)
-                   
-               SINON (Dérivée seconde croisée)
-                   // Formule de la différence centrée pour d^2f / (dxi dxj):
-                   // (f(x+hi+hj) - f(x+hi-hj) - f(x-hi+hj) + f(x-hi-hj)) / (4*h^2)
-                   
-           FIN POUR
-       FIN POUR
-       
-    RETOURNER H
-FIN
 
+               ELSE (mixed second derivative)
+                   // Centered difference formula for d^2f / (dxi dxj):
+                   // (f(x+hi+hj) - f(x+hi-hj) - f(x-hi+hj) + f(x-hi-hj)) / (4*h^2)
+
+           END FOR
+       END FOR
+
+    RETURN H
+END
+```
+
+⬅️ Back to [Multivariable Calculus overview](../README.md) · Previous: [Jacobian Matrix](../03-jacobian-matrix/README.md)
