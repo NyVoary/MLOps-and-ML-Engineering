@@ -1,92 +1,117 @@
-Les Multiplicateurs de Lagrange (Lagrangian Multipliers) ⚖️ sont un outil puissant pour l'optimisation sous contraintes. Nous allons explorer cette méthode pas à pas !🎯 Le Problème : Optimiser sous contrainteEn optimisation classique (comme la descente de gradient), nous cherchons le minimum ou maximum d'une fonction $f(x, y)$ sans aucune restriction.Mais en Machine Learning et en physique, nous avons souvent des contraintes :💰 Maximiser un profit $f(x, y)$ sous la contrainte de ne pas dépasser un budget $g(x, y) = c$.🛡️ Minimiser une erreur de modèle sous la contrainte de régularisation (ex: limiter la taille des poids).💡 L'Intuition GéométriqueImaginons que les courbes de niveau de notre fonction à optimiser $f(x, y)$ forment des lignes (comme sur une carte d'état-major) et que la contrainte $g(x, y) = c$ forme une courbe spécifique.Au point de la contrainte qui atteint le maximum ou minimum de $f$ :La courbe de contrainte est tangente à une courbe de niveau de $f$.Leurs vecteurs gradients ($\nabla f$ et $\nabla g$) sont donc alignés (parallèles) !Ce qui nous donne l'équation fondamentale de Lagrange :$$\nabla f = \lambda \cdot \nabla g$$(où $\lambda$ est le scalaire appelé multiplicateur de Lagrange)🧩 La Fonction Lagrangienne $\mathcal{L}$Pour résoudre ce système facilement, on regroupe tout dans une seule fonction :$$\mathcal{L}(x, y, \lambda) = f(x, y) - \lambda \cdot (g(x, y) - c)$$Trouver le point optimal revient à chercher l'endroit où le gradient de $\mathcal{L}$ s'annule : $\nabla \mathcal{L} = \mathbf{0}$.🧪 Une première étape ensemblePrenons un problème très simple :Fonction à maximiser : $f(x, y) = x + y$Contrainte : $x^2 + y^2 = 1$ (notre point doit rester sur le cercle unité)Pour commencer, calculons séparément les gradients des deux fonctions :Quel est le gradient de $f(x, y)$, soit $\nabla f$ ?Quel est le gradient de la contrainte $g(x, y) = x^2 + y^2$, soit $\nabla g$ ?
+# Lagrangian Multipliers ⚖️
 
-C'est parfaitement exact ! 🎯
+**Lagrangian multipliers** are a powerful tool for **constrained optimization**. I explored this method step by step.
 
-Pour f(x,y)=x+y, les dérivées partielles sont  
-∂x
-∂f
-​
- =1 et  
-∂y
-∂f
-​
- =1, donc ∇f=( 
-1
-1
-​
- ).
+## The problem: optimizing under a constraint
 
-Pour g(x,y)=x 
-2
- +y 
-2
- , les dérivées partielles sont  
-∂x
-∂g
-​
- =2x et  
-∂y
-∂g
-​
- =2y, donc ∇g=( 
-2x
-2y
-​
- ).
+In plain optimization (like gradient descent), I look for the minimum or maximum of a function $f(x, y)$ with no restriction at all.
 
-⚙️ Appliquons la condition de Lagrange
-L'équation d'alignement des gradients ∇f=λ⋅∇g nous donne le système à deux équations suivant :
+But in Machine Learning and physics, I often run into constraints:
 
-1=λ⋅(2x)
-1=λ⋅(2y)
-Et nous avons toujours notre contrainte initiale :
+- 💰 Maximize a profit $f(x, y)$ without exceeding a budget $g(x, y) = c$.
+- 🛡️ Minimize a model's error under a regularization constraint (e.g. limiting the size of the weights).
 
-x 
-2
- +y 
-2
- =1
-💡 À toi d'exprimer x et y
-En observant les deux premières équations :
+## The geometric intuition
 
-Que peux-tu en déduire sur la relation entre x et y ?
+Picture the level curves of the function I want to optimize, $f(x, y)$, as lines on a map, and the constraint $g(x, y) = c$ as one specific curve on that same map.
 
-Si tu remplaces cette relation dans la contrainte x 
-2
- +y 
-2
- =1, quelles valeurs trouves-tu pour x et y ?
+At the point on the constraint curve where $f$ reaches its max or min:
 
-Pour résoudre numériquement un problème d'optimisation sous contrainte d'égalité ($g(x, y) = c$) avec la méthode des Multiplicateurs de Lagrange, nous cherchons le point où le gradient de la fonction Lagrangienne $\mathcal{L}(x, y, \lambda) = f(x, y) - \lambda \cdot (g(x, y) - c)$ s'annule complètement :$$\nabla \mathcal{L}(x, y, \lambda) = \mathbf{0}$$
+- The constraint curve is **tangent** to a level curve of $f$.
+- Their gradient vectors ($\nabla f$ and $\nabla g$) are therefore **aligned** (parallel)!
 
-ALGORITHME: Solve_Lagrange_Equality_Constraint
+Which gives me the fundamental Lagrange equation:
 
-ENTRÉES:
-    - f(x, y) : Fonction objectif à optimiser
-    - g(x, y) : Fonction de contrainte
-    - c       : Valeur cible de la contrainte (g(x, y) = c)
-    - point_initial : Estimation du vecteur [x, y, lambda]
+$$\nabla f = \lambda \cdot \nabla g$$
 
-SORTIE:
-    - [x_opt, y_opt] : Point optimal respectant la contrainte
-    - lambda_opt     : Multiplicateur de Lagrange à l'équilibre
-    - f_opt          : Valeur maximale/minimale f(x_opt, y_opt)
+(where $\lambda$ is the scalar called the **Lagrange multiplier**)
 
-DÉBUT
-    1. Définir le système d'équations non-linéaires F(x, y, lambda) = 0:
-       │
-       ├── Équation 1 : ∂f/∂x - lambda * (∂g/∂x) = 0   (Gradient f = lambda * Gradient g sur x)
-       ├── Équation 2 : ∂f/∂y - lambda * (∂g/∂y) = 0   (Gradient f = lambda * Gradient g sur y)
-       └── Équation 3 : g(x, y) - c = 0               (Respect de la contrainte)
+## The Lagrangian function $\mathcal{L}$
 
-    2. Résoudre le système F(x, y, lambda) = [0, 0, 0] 
-       (En utilisant un solveur numérique de racines comme Newton-Raphson)
+To solve this system easily, I gather everything into a single function:
 
-    3. Extraire les solutions [x_opt, y_opt, lambda_opt]
+$$\mathcal{L}(x, y, \lambda) = f(x, y) - \lambda \cdot (g(x, y) - c)$$
 
-    4. Calculer la valeur optimale : f_opt = f(x_opt, y_opt)
+Finding the optimal point becomes finding where the gradient of $\mathcal{L}$ vanishes: $\nabla \mathcal{L} = \mathbf{0}$.
 
-    RETOURNER x_opt, y_opt, lambda_opt, f_opt
-FIN
+## Worked example
 
-Remarque comment les 3 équations du pseudo-code correspondent exactement à ce que nous avons fait à la main juste avant !Pour notre exemple ($f(x, y) = x + y$ et $g(x, y) = x^2 + y^2 = 1$) :L'équation 1 devient : $1 - \lambda(2x) = 0$L'équation 2 devient : $1 - \lambda(2y) = 0$L'équation 3 devient : $x^2 + y^2 - 1 = 0$
+I took a simple problem:
+
+- Function to maximize: $f(x, y) = x + y$
+- Constraint: $x^2 + y^2 = 1$ (I have to stay on the unit circle)
+
+**Step 1 — the two gradients.**
+
+$$\nabla f = \begin{pmatrix} 1 \\ 1 \end{pmatrix} \qquad \nabla g = \begin{pmatrix} 2x \\ 2y \end{pmatrix}$$
+
+**Step 2 — apply the Lagrange condition.** The alignment equation $\nabla f = \lambda \cdot \nabla g$ gives me a system of two equations, plus my original constraint:
+
+$$1 = \lambda (2x) \qquad 1 = \lambda (2y) \qquad x^2 + y^2 = 1$$
+
+**Step 3 — solve for x and y.** The first two equations tell me $\lambda (2x) = \lambda (2y)$, so $x = y$. Substituting into the constraint:
+
+$$x^2 + x^2 = 1 \implies x = y = \frac{1}{\sqrt{2}} \quad (\text{taking the positive root, for the maximum})$$
+
+And $\lambda = \dfrac{1}{2x} = \dfrac{1}{\sqrt{2}}$.
+
+**Step 4 — the optimal value.**
+
+$$f_{\max} = x + y = \frac{2}{\sqrt{2}} = \sqrt{2} \approx 1.4142$$
+
+> 💡 The negative root $x = y = -1/\sqrt{2}$ solves the same system too — it's the **minimum** of $f$ on the circle ($f_{\min} = -\sqrt{2}$), not the maximum. The Lagrange condition alone finds *critical* points on the constraint; I still have to check which one is the max and which is the min.
+
+## Numerically, with SciPy
+
+Solving this system by hand works for simple cases, but in practice I let `scipy.optimize.minimize` do it, with the constraint passed as an `'eq'` constraint (`g(x, y) - c = 0`). Since SciPy only *minimizes*, maximizing $f$ means minimizing $-f$.
+
+## Visualization 📊
+
+I plotted the constraint circle together with several level lines of $f(x, y) = x + y$: at the optimum, the circle is exactly tangent to a level line, and $\nabla f$ (green) sits right on top of $\nabla g$ (orange) — same direction, different length, exactly what $\nabla f = \lambda \cdot \nabla g$ says.
+
+![Constraint circle tangent to a level curve of f, with the two aligned gradients](lagrangian_multipliers_plot.png)
+
+*Generated by [`plot_lagrangian_multipliers.py`](plot_lagrangian_multipliers.py).*
+
+## Scripts in this folder
+
+- [`lagrangian_multipliers.py`](lagrangian_multipliers.py) — solves the worked example numerically with `scipy.optimize.minimize` and an equality constraint, checked against the analytical answer ($\sqrt{2}$).
+- [`plot_lagrangian_multipliers.py`](plot_lagrangian_multipliers.py) — the visualization above.
+
+## Pseudo-code: Solve_Lagrange_Equality_Constraint
+
+```text
+ALGORITHM: Solve_Lagrange_Equality_Constraint
+
+INPUT:
+    - f(x, y): objective function to optimize
+    - g(x, y): constraint function
+    - c: target value of the constraint (g(x, y) = c)
+    - initial_point: starting guess for the vector [x, y, lambda]
+
+OUTPUT:
+    - [x_opt, y_opt]: optimal point satisfying the constraint
+    - lambda_opt: Lagrange multiplier at the optimum
+    - f_opt: maximum/minimum value f(x_opt, y_opt)
+
+BEGIN
+    1. Define the system of nonlinear equations F(x, y, lambda) = 0:
+       |
+       |-- Equation 1: df/dx - lambda * (dg/dx) = 0   (grad f = lambda * grad g on x)
+       |-- Equation 2: df/dy - lambda * (dg/dy) = 0   (grad f = lambda * grad g on y)
+       `-- Equation 3: g(x, y) - c = 0                (the constraint is respected)
+
+    2. Solve the system F(x, y, lambda) = [0, 0, 0]
+       (using a numerical root solver, e.g. Newton-Raphson)
+
+    3. Extract the solution [x_opt, y_opt, lambda_opt]
+
+    4. Compute the optimal value: f_opt = f(x_opt, y_opt)
+
+    RETURN x_opt, y_opt, lambda_opt, f_opt
+END
+```
+
+Note how the three equations above match exactly what I did by hand: for my example ($f(x, y) = x + y$, $g(x, y) = x^2 + y^2 = 1$), equation 1 becomes $1 - \lambda(2x) = 0$, equation 2 becomes $1 - \lambda(2y) = 0$, and equation 3 is $x^2 + y^2 - 1 = 0$.
+
+⬅️ Back to [Multivariable Calculus overview](../README.md) · Previous: [Hessian Matrix](../04-hessian-matrix/README.md)
