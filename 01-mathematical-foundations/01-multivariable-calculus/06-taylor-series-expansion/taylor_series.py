@@ -3,8 +3,8 @@ import math
 
 def numerical_derivative(f, x, n, h=1e-3):
     """
-    Calcule la n-ième dérivée numérique d'une fonction f au point x
-    en utilisant les différences finies (approximations successives).
+    Computes the n-th numerical derivative of a function f at point x
+    using finite differences (successive approximations).
     """
     if n == 0:
         return f(x)
@@ -15,61 +15,61 @@ def numerical_derivative(f, x, n, h=1e-3):
     elif n == 3:
         return (f(x + 2*h) - 2*f(x + h) + 2*f(x - h) - f(x - 2*h)) / (2 * (h**3))
     else:
-        # Pour n >= 4, approche récursive d'ordre 1
-        return (numerical_derivative(f, x + h, n - 1, h) - 
+        # For n >= 4, recursive order-1 approach
+        return (numerical_derivative(f, x + h, n - 1, h) -
                 numerical_derivative(f, x - h, n - 1, h)) / (2 * h)
 
 def taylor_expansion_1d(f, a, x, order_N):
     """
-    Calcule l'approximation en Série de Taylor de f(x) autour du point 'a'
-    jusqu'à l'ordre order_N de manière numérique.
+    Computes the Taylor series approximation of f(x) around point 'a'
+    up to order order_N, numerically.
     """
     approx = 0.0
     terms = []
-    
+
     for n in range(order_N + 1):
-        # 1. Calcul de la n-ième dérivée f^(n)(a)
+        # 1. Compute the n-th derivative f^(n)(a)
         df_n = numerical_derivative(f, a, n)
-        
-        # 2. Calcul du terme (f^(n)(a) / n!) * (x - a)^n
+
+        # 2. Compute the term (f^(n)(a) / n!) * (x - a)^n
         fact = math.factorial(n)
         term = (df_n / fact) * ((x - a)**n)
-        
+
         approx += term
         terms.append(term)
-        
+
     return approx, terms
 
 # =====================================================================
-# Démonstration et Validation
+# Demonstration and validation
 # =====================================================================
 
 if __name__ == "__main__":
     print("==================================================")
-    print(" 📐 APPROXIMATION PAR SÉRIE DE TAYLOR (NUMÉRIQUE)")
+    print(" TAYLOR SERIES APPROXIMATION (NUMERICAL)")
     print("==================================================\n")
 
-    # Fonction de test : exp(x) autour de a = 0
+    # Test function: exp(x) around a = 0
     f_test = np.exp
     a = 0.0
     x_eval = 0.1
     max_order = 3
 
-    print(f"Fonction : f(x) = e^x")
-    print(f"Point de développement (a) : {a}")
-    print(f"Point d'évaluation (x)     : {x_eval}\n")
+    print(f"Function: f(x) = e^x")
+    print(f"Expansion point (a): {a}")
+    print(f"Evaluation point (x): {x_eval}\n")
 
     true_val = f_test(x_eval)
     approx_val, terms = taylor_expansion_1d(f_test, a, x_eval, max_order)
 
-    print("--- Résultats de l'approximation par ordre ---")
+    print("--- Approximation results by order ---")
     cum_sum = 0
     for order, term in enumerate(terms):
         cum_sum += term
-        print(f"Ordre {order} : terme = {term:.8f} | Cumul = {cum_sum:.8f}")
+        print(f"Order {order}: term = {term:.8f} | cumulative = {cum_sum:.8f}")
 
     print("\n--------------------------------------------------")
-    print(f"Vraie valeur de e^({x_eval})  : {true_val:.8f}")
-    print(f"Valeur estimée (Ordre {max_order}) : {approx_val:.8f}")
-    print(f"Erreur absolue              : {abs(true_val - approx_val):.8e}")
+    print(f"True value of e^({x_eval}): {true_val:.8f}")
+    print(f"Estimated value (order {max_order}): {approx_val:.8f}")
+    print(f"Absolute error: {abs(true_val - approx_val):.8e}")
     print("==================================================")
