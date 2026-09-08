@@ -78,7 +78,7 @@ Training a neural network loops through three phases:
 
 ### The chain rule and the Jacobian
 
-During backpropagation, I need the gradient of the loss $\mathcal{L}$ with respect to every weight $w$ and bias $b$. For a simple chain $x \to (\text{neuron}, w) \to \hat{y} \to \mathcal{L}$, the chain rule multiplies local sensitivities:
+During backpropagation, the gradient of the loss $\mathcal{L}$ is needed with respect to every weight $w$ and bias $b$. For a simple chain $x \to (\text{neuron}, w) \to \hat{y} \to \mathcal{L}$, the chain rule multiplies local sensitivities:
 
 $$\frac{\partial \mathcal{L}}{\partial w} = \frac{\partial \mathcal{L}}{\partial \hat{y}} \times \frac{\partial \hat{y}}{\partial w}$$
 
