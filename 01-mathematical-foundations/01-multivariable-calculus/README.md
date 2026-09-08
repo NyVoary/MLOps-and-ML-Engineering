@@ -1,25 +1,27 @@
 # Multivariable Calculus
 
-Roadmap sub-section covering how calculus extends to functions of several variables. Each topic below has its own folder with a focused `README.md` (theory, worked example, pseudo-code) and its implementation script(s).
+This is the roadmap sub-section where I learn how calculus extends to functions of several variables. Each topic below has its own folder with a focused `README.md` (theory, worked example, pseudo-code, a plot) and my implementation script(s).
 
 ## Topics
 
-1. [Partial Derivatives](01-partial-derivatives/README.md) 🔍 - how a function changes when only one variable moves.
-2. [Gradient Vector](02-gradient-vector/README.md) 🧭 - all partial derivatives gathered into one vector; the direction of steepest ascent.
-3. [Jacobian Matrix](03-jacobian-matrix/README.md) 🧮 - the gradient generalized to functions with multiple outputs; the engine behind backpropagation.
+1. [Partial Derivatives](01-partial-derivatives/README.md) 🔍 — how a function changes when only one variable moves.
+2. [Gradient Vector](02-gradient-vector/README.md) 🧭 — all partial derivatives gathered into one vector; the direction of steepest ascent.
+3. [Jacobian Matrix](03-jacobian-matrix/README.md) 🧮 — the gradient generalized to functions with multiple outputs; the engine behind backpropagation.
+4. [Hessian Matrix](04-hessian-matrix/README.md) 🧠 — the gradient of the gradient; the curvature that tells a minimum from a saddle point.
 
 ## Shared conventions
 
 ### Script structure
 
-Across all three topics, the same software-engineering approach is used (with doctests, typing, and docstrings):
+Across all topics, I use the same software-engineering approach (doctests, typing, docstrings):
 
 1. **Analytical (exact) approach**: a Python function that computes the exact value from the known formula.
 2. **Numerical approach (finite differences)**: a generic function that approximates the same quantity using the centered finite-difference formula:
 
 $$\frac{\partial f}{\partial x} \approx \frac{f(x + h, y) - f(x - h, y)}{2h}$$
 
-3. **Validation**: comparing the exact (analytical) value against the numerical approximation to verify the implementation is correct.
+3. **Validation**: comparing the exact (analytical) value against the numerical approximation to check my implementation is correct.
+4. **Visualization**: whenever it helps me build intuition, a `plot_*.py` script using Matplotlib — a 2D/3D picture of the function, its slope, or its curvature.
 
 ### A note on the step size (h)
 
@@ -42,3 +44,5 @@ For a standard floating-point representation (64-bit double precision, with $\ep
 $$h \approx \sqrt[3]{\epsilon} \approx \sqrt[3]{10^{-16}} \approx 10^{-5.3}$$
 
 This is why $h = 10^{-5}$ (or $10^{-6}$) is the standard default setting in engineering: it minimizes both the geometric error of the curve and the round-off error of the computer. 💡
+
+Note: for the Hessian (second derivatives), I use a slightly larger $h = 10^{-4}$ instead — the theoretical optimum for a second-order centered difference scales as $\epsilon^{1/4}$ rather than $\epsilon^{1/3}$, since the formula divides by $h^2$ and is more sensitive to round-off error.
