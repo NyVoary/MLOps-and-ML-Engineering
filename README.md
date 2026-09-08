@@ -3,6 +3,7 @@
 [![Python](https://img.shields.io/badge/Python-3.11%2B-3776AB?logo=python&logoColor=white)](https://www.python.org/)
 [![NumPy](https://img.shields.io/badge/NumPy-numerical-013243?logo=numpy&logoColor=white)](https://numpy.org/)
 [![SymPy](https://img.shields.io/badge/SymPy-symbolic-3B5526?logo=sympy&logoColor=white)](https://www.sympy.org/)
+[![Matplotlib](https://img.shields.io/badge/Matplotlib-visualization-11557C?logo=plotly&logoColor=white)](https://matplotlib.org/)
 [![SciPy](https://img.shields.io/badge/SciPy-planned-8CAAE6?logo=scipy&logoColor=white)](https://scipy.org/)
 [![scikit--learn](https://img.shields.io/badge/scikit--learn-planned-F7931E?logo=scikitlearn&logoColor=white)](https://scikit-learn.org/)
 [![PyTorch](https://img.shields.io/badge/PyTorch-planned-EE4C2C?logo=pytorch&logoColor=white)](https://pytorch.org/)
@@ -11,15 +12,15 @@
 
 This repository is my **personal learning journal** as I follow the [Machine Learning Engineering and MLOps](https://roadmap.sh/ai/roadmap/machine-learning-engineering-and-mlops) roadmap on [roadmap.sh](https://roadmap.sh/).
 
-The goal isn't to build a library or a finished product, but to **keep a written, version-controlled record** of what I learn: theory, notes, exercises, scripts, and small "from scratch" implementations before moving on to the standard tools/frameworks of the field.
+I'm not trying to build a library or a finished product here - this is me **keeping a written, version-controlled record** of what I learn: theory, notes, exercises, scripts, small "from scratch" implementations, and the odd plot to check my intuition, before I let myself reach for the standard tools/frameworks of the field. If you've stumbled onto this repo, think of it as my notebook rather than a tutorial - but you're welcome to follow along.
 
-## 🗂️ Repository organization
+## 🗂️ How I organize this
 
-The roadmap has three levels - **Section** → **Sub-section** → **Topic** (e.g. *Mathematical Foundations* → *Multivariable Calculus* → *Jacobian Matrices*). The folder structure mirrors all three levels, one folder each, so every topic gets its own `README.md` and its own script(s):
+The roadmap has three levels - **Section** → **Sub-section** → **Topic** (e.g. *Mathematical Foundations* → *Multivariable Calculus* → *Jacobian Matrices*). I mirror all three levels as folders, one each, so every topic gets its own `README.md` and its own script(s) - that way future-me can find things without having to remember where I put them:
 
 - Each **major roadmap section** becomes a **numbered folder** at the root (e.g. `01-mathematical-foundations`).
-- Each **roadmap sub-section** becomes a **numbered subfolder** inside it (e.g. `01-multivariable-calculus`), with its own `README.md` acting as an index/overview for that sub-section plus any conventions shared across its topics.
-- Each **individual topic** of that sub-section (e.g. Partial Derivatives, Gradient Vectors, Jacobian Matrices...) becomes its own **numbered subfolder** inside the sub-section, with its own `README.md` (theory, worked example, pseudo-code) and implementation script(s).
+- Each **roadmap sub-section** becomes a **numbered subfolder** inside it (e.g. `01-multivariable-calculus`), with its own `README.md` acting as an index/overview for that sub-section plus any conventions I share across its topics.
+- Each **individual topic** of that sub-section (e.g. Partial Derivatives, Gradient Vectors, Jacobian Matrices...) becomes its own **numbered subfolder** inside the sub-section, with its own `README.md` (theory, worked example, pseudo-code, a plot when it helps) and implementation script(s).
 
 ```
 01-mathematical-foundations/
@@ -28,13 +29,20 @@ The roadmap has three levels - **Section** → **Sub-section** → **Topic** (e.
     ├── 01-partial-derivatives/
     │   ├── README.md
     │   ├── partial_derivatives.py         # "from scratch" implementation
-    │   └── interactive_partial_derivatives.py  # comparison with a standard library (SymPy/NumPy)
+    │   ├── interactive_partial_derivatives.py  # comparison with a standard library (SymPy/NumPy)
+    │   └── plot_partial_derivatives.py    # 2D/3D visualization
     ├── 02-gradient-vector/
     │   ├── README.md
-    │   └── gradient_vector.py
-    └── 03-jacobian-matrix/
+    │   ├── gradient_vector.py
+    │   └── plot_gradient_vector.py
+    ├── 03-jacobian-matrix/
+    │   ├── README.md
+    │   ├── jacobian_matrix.py
+    │   └── plot_jacobian_matrix.py
+    └── 04-hessian-matrix/
         ├── README.md
-        └── jacobian_matrix.py
+        ├── hessian_matrix.py
+        └── plot_hessian_matrix.py
 02-<next-section>/
 └── 01-<first-sub-section>/
     ├── README.md
@@ -43,21 +51,24 @@ The roadmap has three levels - **Section** → **Sub-section** → **Topic** (e.
 ...
 ```
 
-Each topic README links back to its sub-section index and to its sibling topics, so the whole sub-section is browsable both top-down (from the index) and sequentially (topic to topic).
+Each topic README links back to its sub-section index and to its sibling topics, so I can browse the whole sub-section both top-down (from the index) and sequentially (topic to topic).
 
-## 📄 What goes in each topic folder?
+## 📄 What I put in each topic folder
 
 **1. A summary sheet (`README.md`)**
-A short, synthetic sheet summarizing the mathematical or algorithmic intuition behind the topic: definitions, notation, a worked example, pseudo-code. The goal is to be able to re-read it later and understand the concept without re-deriving everything.
+A short, synthetic sheet where I write down the mathematical or algorithmic intuition behind the topic: definitions, notation, a worked example, pseudo-code. The point is to be able to re-read it later and understand the concept again without re-deriving everything from scratch.
 
 **2. Implementation scripts (`.py` or `.ipynb`)**
 
-- **Code the concept from scratch** (e.g. rewrite gradient descent or derivative computation with NumPy), to really understand the mechanism under the hood.
-- **Use the industry-standard library** (e.g. SciPy, PyTorch, or Scikit-Learn) to compare results and validate the "from scratch" implementation.
+- **I code the concept from scratch** (e.g. rewrite gradient descent or derivative computation with NumPy), to really understand the mechanism under the hood.
+- **I use the industry-standard library** (e.g. SciPy, PyTorch, or Scikit-Learn) to compare results and validate my "from scratch" implementation.
+
+**3. A visualization, when it helps (`plot_*.py`)**
+Some of these concepts click a lot faster once I've actually seen them - a curve, a surface, a vector field. So whenever it's useful, I add a small Matplotlib script that draws a 2D or 3D picture of the function I'm studying (and save the figure next to the script, embedded in the README).
 
 ## ✅ Progress tracker
 
-The full checklist below mirrors the [roadmap.sh](https://roadmap.sh/ai/roadmap/machine-learning-engineering-and-mlops) tree - Section → Sub-section → Topic. Checked topics have a corresponding folder + README section; everything else is still ahead. *(Advanced Data Structures' sub-sections weren't fully visible when this list was captured - to be completed once that section is reached.)*
+The full checklist below mirrors the [roadmap.sh](https://roadmap.sh/ai/roadmap/machine-learning-engineering-and-mlops) tree - Section → Sub-section → Topic. What I've checked off has a corresponding folder + README; everything else is still ahead of me. *(Advanced Data Structures' sub-sections weren't fully visible when I captured this list - I'll complete it once I reach that section.)*
 
 <details open>
 <summary><b>01. Mathematical Foundations</b></summary>
@@ -101,7 +112,7 @@ The full checklist below mirrors the [roadmap.sh](https://roadmap.sh/ai/roadmap/
 
 - [ ] Binary Search Trees
 - [ ] Merkle Trees
-- [ ] *(remaining sub-sections/topics to fill in once reached)*
+- [ ] *(remaining sub-sections/topics to fill in once I reach them)*
 
 </details>
 
@@ -445,15 +456,16 @@ The full checklist below mirrors the [roadmap.sh](https://roadmap.sh/ai/roadmap/
 
 </details>
 
-*(Check off items as I progress through the roadmap; each sub-section links to its folder's README once one exists, where individual topics get their own section.)*
+*(I check off items as I progress through the roadmap; each sub-section links to its folder's README once one exists, where individual topics get their own section.)*
 
-## 🛠️ Code conventions
+## 🛠️ Code conventions I try to stick to
 
 - **Type hints** on every function.
 - **Docstrings** with examples.
 - **Doctests** to validate examples directly from the docstring.
-- When relevant: comparing an **analytical/exact** approach vs. a **numerical** approach (finite differences) to validate the implementation.
+- Comparing an **analytical/exact** approach vs. a **numerical** approach (finite differences) whenever it's relevant, to validate my implementation.
+- A quick **plot** whenever a picture would help me (or future-me) understand the concept faster than the formula alone.
 
 ## 🔗 Resources
 
-- Roadmap followed: [Machine Learning Engineering and MLOps](https://roadmap.sh/ai/roadmap/machine-learning-engineering-and-mlops)
+- Roadmap I'm following: [Machine Learning Engineering and MLOps](https://roadmap.sh/ai/roadmap/machine-learning-engineering-and-mlops)
