@@ -4,7 +4,7 @@
 [![NumPy](https://img.shields.io/badge/NumPy-numerical-013243?logo=numpy&logoColor=white)](https://numpy.org/)
 [![SymPy](https://img.shields.io/badge/SymPy-symbolic-3B5526?logo=sympy&logoColor=white)](https://www.sympy.org/)
 [![Matplotlib](https://img.shields.io/badge/Matplotlib-visualization-11557C?logo=plotly&logoColor=white)](https://matplotlib.org/)
-[![SciPy](https://img.shields.io/badge/SciPy-planned-8CAAE6?logo=scipy&logoColor=white)](https://scipy.org/)
+[![SciPy](https://img.shields.io/badge/SciPy-numerical-8CAAE6?logo=scipy&logoColor=white)](https://scipy.org/)
 [![scikit--learn](https://img.shields.io/badge/scikit--learn-planned-F7931E?logo=scikitlearn&logoColor=white)](https://scikit-learn.org/)
 [![PyTorch](https://img.shields.io/badge/PyTorch-planned-EE4C2C?logo=pytorch&logoColor=white)](https://pytorch.org/)
 [![Docker](https://img.shields.io/badge/Docker-planned-2496ED?logo=docker&logoColor=white)](https://www.docker.com/)
