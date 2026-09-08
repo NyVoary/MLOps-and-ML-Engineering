@@ -83,7 +83,7 @@ The full checklist below mirrors the [roadmap.sh](https://roadmap.sh/ai/roadmap/
   - [x] [Jacobian Matrices](01-mathematical-foundations/01-multivariable-calculus/03-jacobian-matrix/README.md)
   - [x] [Hessian Matrices](01-mathematical-foundations/01-multivariable-calculus/04-hessian-matrix/README.md)
   - [x] [Lagrangian Multipliers](01-mathematical-foundations/01-multivariable-calculus/05-lagrangian-multipliers/README.md)
-  - [ ] Taylor Series Expansion
+  - [x] [Taylor Series Expansion](01-mathematical-foundations/01-multivariable-calculus/06-taylor-series-expansion/README.md)
   - [ ] Vector Calculus
 - [ ] 01.2 Linear Algebra Fundamentals
   - [ ] Vector Spaces
