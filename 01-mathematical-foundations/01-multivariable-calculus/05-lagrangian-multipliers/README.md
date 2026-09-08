@@ -114,4 +114,4 @@ END
 
 Note how the three equations above match exactly what I did by hand: for my example ($f(x, y) = x + y$, $g(x, y) = x^2 + y^2 = 1$), equation 1 becomes $1 - \lambda(2x) = 0$, equation 2 becomes $1 - \lambda(2y) = 0$, and equation 3 is $x^2 + y^2 - 1 = 0$.
 
-⬅️ Back to [Multivariable Calculus overview](../README.md) · Previous: [Hessian Matrix](../04-hessian-matrix/README.md)
+⬅️ Back to [Multivariable Calculus overview](../README.md) · Previous: [Hessian Matrix](../04-hessian-matrix/README.md) · Next: [Taylor Series Expansion](../06-taylor-series-expansion/README.md)
