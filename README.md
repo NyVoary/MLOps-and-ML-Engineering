@@ -39,10 +39,14 @@ The roadmap has three levels - **Section** → **Sub-section** → **Topic** (e.
     │   ├── README.md
     │   ├── jacobian_matrix.py
     │   └── plot_jacobian_matrix.py
-    └── 04-hessian-matrix/
+    ├── 04-hessian-matrix/
+    │   ├── README.md
+    │   ├── hessian_matrix.py
+    │   └── plot_hessian_matrix.py
+    └── 05-lagrangian-multipliers/
         ├── README.md
-        ├── hessian_matrix.py
-        └── plot_hessian_matrix.py
+        ├── lagrangian_multipliers.py       # uses SciPy's constrained solver
+        └── plot_lagrangian_multipliers.py
 02-<next-section>/
 └── 01-<first-sub-section>/
     ├── README.md
