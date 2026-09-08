@@ -1,6 +1,6 @@
 # Partial Derivatives 🔍
 
-When a function depends on several variables — for example $f(x, y)$ — the **partial derivative** measures how the function changes when we vary **a single variable**, keeping all others constant.
+When a function depends on several variables - for example $f(x, y)$ - the **partial derivative** measures how the function changes when we vary **a single variable**, keeping all others constant.
 
 ## Notation
 
@@ -64,8 +64,8 @@ Try to work out both calculations!
 
 ## Scripts in this folder
 
-- [`partial_derivatives.py`](partial_derivatives.py) — "from scratch" implementation: `partial_derivative_x`/`partial_derivative_y` via centered finite differences, validated against the hand-computed exact values.
-- [`interactive_partial_derivatives.py`](interactive_partial_derivatives.py) — comparison with a standard library: SymPy computes the symbolic derivative for display, NumPy computes the numeric one via finite differences.
+- [`partial_derivatives.py`](partial_derivatives.py) - "from scratch" implementation: `partial_derivative_x`/`partial_derivative_y` via centered finite differences, validated against the hand-computed exact values.
+- [`interactive_partial_derivatives.py`](interactive_partial_derivatives.py) - comparison with a standard library: SymPy computes the symbolic derivative for display, NumPy computes the numeric one via finite differences.
 
 ## Pseudo-code: Partial Derivative (Central Difference)
 

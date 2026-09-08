@@ -4,9 +4,9 @@ Roadmap sub-section covering how calculus extends to functions of several variab
 
 ## Topics
 
-1. [Partial Derivatives](01-partial-derivatives/README.md) 🔍 — how a function changes when only one variable moves.
-2. [Gradient Vector](02-gradient-vector/README.md) 🧭 — all partial derivatives gathered into one vector; the direction of steepest ascent.
-3. [Jacobian Matrix](03-jacobian-matrix/README.md) 🧮 — the gradient generalized to functions with multiple outputs; the engine behind backpropagation.
+1. [Partial Derivatives](01-partial-derivatives/README.md) 🔍 - how a function changes when only one variable moves.
+2. [Gradient Vector](02-gradient-vector/README.md) 🧭 - all partial derivatives gathered into one vector; the direction of steepest ascent.
+3. [Jacobian Matrix](03-jacobian-matrix/README.md) 🧮 - the gradient generalized to functions with multiple outputs; the engine behind backpropagation.
 
 ## Shared conventions
 

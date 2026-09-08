@@ -1,4 +1,4 @@
-# MLOps & ML Engineering — Learning Journal 📓
+# MLOps & ML Engineering - Learning Journal 📓
 
 [![Python](https://img.shields.io/badge/Python-3.11%2B-3776AB?logo=python&logoColor=white)](https://www.python.org/)
 [![NumPy](https://img.shields.io/badge/NumPy-numerical-013243?logo=numpy&logoColor=white)](https://numpy.org/)
@@ -15,7 +15,7 @@ The goal isn't to build a library or a finished product, but to **keep a written
 
 ## 🗂️ Repository organization
 
-The roadmap has three levels — **Section** → **Sub-section** → **Topic** (e.g. *Mathematical Foundations* → *Multivariable Calculus* → *Jacobian Matrices*). The folder structure mirrors all three levels, one folder each, so every topic gets its own `README.md` and its own script(s):
+The roadmap has three levels - **Section** → **Sub-section** → **Topic** (e.g. *Mathematical Foundations* → *Multivariable Calculus* → *Jacobian Matrices*). The folder structure mirrors all three levels, one folder each, so every topic gets its own `README.md` and its own script(s):
 
 - Each **major roadmap section** becomes a **numbered folder** at the root (e.g. `01-mathematical-foundations`).
 - Each **roadmap sub-section** becomes a **numbered subfolder** inside it (e.g. `01-multivariable-calculus`), with its own `README.md` acting as an index/overview for that sub-section plus any conventions shared across its topics.
@@ -57,7 +57,7 @@ A short, synthetic sheet summarizing the mathematical or algorithmic intuition b
 
 ## ✅ Progress tracker
 
-The full checklist below mirrors the [roadmap.sh](https://roadmap.sh/ai/roadmap/machine-learning-engineering-and-mlops) tree — Section → Sub-section → Topic. Checked topics have a corresponding folder + README section; everything else is still ahead. *(Advanced Data Structures' sub-sections weren't fully visible when this list was captured — to be completed once that section is reached.)*
+The full checklist below mirrors the [roadmap.sh](https://roadmap.sh/ai/roadmap/machine-learning-engineering-and-mlops) tree - Section → Sub-section → Topic. Checked topics have a corresponding folder + README section; everything else is still ahead. *(Advanced Data Structures' sub-sections weren't fully visible when this list was captured - to be completed once that section is reached.)*
 
 <details open>
 <summary><b>01. Mathematical Foundations</b></summary>

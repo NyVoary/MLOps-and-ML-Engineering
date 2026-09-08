@@ -31,7 +31,7 @@ $$\frac{\partial f}{\partial x} \approx \frac{f(x + h, y) - f(x - h, y)}{2h}$$
 
 ## Scripts in this folder
 
-- [`gradient_vector.py`](gradient_vector.py) — `analytical_gradient` (exact formula) vs. `numerical_gradient` (centered finite differences), with a validation check (`np.allclose`) between the two.
+- [`gradient_vector.py`](gradient_vector.py) - `analytical_gradient` (exact formula) vs. `numerical_gradient` (centered finite differences), with a validation check (`np.allclose`) between the two.
 
 ## Pseudo-code: Gradient Vector
 
