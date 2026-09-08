@@ -32,21 +32,9 @@ The roadmap has three levels - **Section** → **Sub-section** → **Topic** (e.
     │   ├── interactive_partial_derivatives.py  # comparison with a standard library (SymPy/NumPy)
     │   └── plot_partial_derivatives.py    # 2D/3D visualization
     ├── 02-gradient-vector/
-    │   ├── README.md
-    │   ├── gradient_vector.py
-    │   └── plot_gradient_vector.py
-    ├── 03-jacobian-matrix/
-    │   ├── README.md
-    │   ├── jacobian_matrix.py
-    │   └── plot_jacobian_matrix.py
-    ├── 04-hessian-matrix/
-    │   ├── README.md
-    │   ├── hessian_matrix.py
-    │   └── plot_hessian_matrix.py
-    └── 05-lagrangian-multipliers/
-        ├── README.md
-        ├── lagrangian_multipliers.py       # uses SciPy's constrained solver
-        └── plot_lagrangian_multipliers.py
+    │   └── ... (same pattern: README.md + script(s) + plot_*.py)
+    └── 06-taylor-series-expansion/        # → see the sub-section's own README for the full topic list
+        └── ...
 02-<next-section>/
 └── 01-<first-sub-section>/
     ├── README.md
