@@ -1,24 +1,25 @@
 """
-Visualisation des dérivées partielles de f(x, y) = x^2 * y + 4 * y^2.
+Visualizing the partial derivatives of f(x, y) = x^2 * y + 4 * y^2.
 
-Je trace :
-    1. La surface 3D de f(x, y), avec le point d'évaluation marqué.
-    2. La "tranche" en x (y fixé) : une coupe de la surface où seul x bouge.
-       La pente de cette courbe au point d'évaluation, c'est df/dx.
-    3. La "tranche" en y (x fixé) : même idée, mais c'est y qui bouge.
-       La pente de cette courbe, c'est df/dy.
+I plot:
+    1. The 3D surface of f(x, y), with the evaluation point marked.
+    2. The "slice" in x (y held fixed): a cut through the surface where
+       only x moves. The slope of this curve at the evaluation point
+       is exactly df/dx.
+    3. The "slice" in y (x held fixed): same idea, but y is the one moving.
+       The slope of this curve is df/dy.
 
-C'est exactement l'intuition du cours : geler une variable et ne regarder
-que l'effet de l'autre.
+This is exactly the intuition from the theory: freeze one variable and
+look only at the effect of the other.
 """
 
 import numpy as np
 import matplotlib.pyplot as plt
-from mpl_toolkits.mplot3d import Axes3D  # noqa: F401  (nécessaire pour projection='3d')
+from mpl_toolkits.mplot3d import Axes3D  # noqa: F401  (needed for projection='3d')
 
 
 def f(x: np.ndarray, y: np.ndarray) -> np.ndarray:
-    """Fonction d'étude : f(x, y) = x^2 * y + 4 * y^2."""
+    """Function under study: f(x, y) = x^2 * y + 4 * y^2."""
     return (x**2) * y + 4 * (y**2)
 
 
@@ -37,7 +38,7 @@ def plot(x0: float = 1.0, y0: float = 2.0, save_path: str = "partial_derivatives
 
     fig = plt.figure(figsize=(15, 5))
 
-    # --- 1. Surface 3D avec le point d'évaluation ---
+    # --- 1. 3D surface with the evaluation point ---
     ax1 = fig.add_subplot(1, 3, 1, projection="3d")
     x_range = np.linspace(x0 - 2, x0 + 2, 60)
     y_range = np.linspace(y0 - 2, y0 + 2, 60)
@@ -51,36 +52,36 @@ def plot(x0: float = 1.0, y0: float = 2.0, save_path: str = "partial_derivatives
     ax1.set_zlabel("f(x, y)")
     ax1.legend()
 
-    # --- 2. Tranche en x : y = y0 fixé, x varie ---
+    # --- 2. Slice in x: y = y0 fixed, x varies ---
     ax2 = fig.add_subplot(1, 3, 2)
     x_slice = np.linspace(x0 - 2, x0 + 2, 200)
     z_slice_x = f(x_slice, y0)
     ax2.plot(x_slice, z_slice_x, color="steelblue")
     ax2.scatter([x0], [z0], color="red", zorder=5)
     tangent_x = z0 + df_dx * (x_slice - x0)
-    ax2.plot(x_slice, tangent_x, "r--", label=f"tangente, pente = ∂f/∂x = {df_dx:.2f}")
-    ax2.set_title(f"Tranche en x (y = {y0} fixé)")
+    ax2.plot(x_slice, tangent_x, "r--", label=f"tangent, slope = ∂f/∂x = {df_dx:.2f}")
+    ax2.set_title(f"Slice in x (y = {y0} fixed)")
     ax2.set_xlabel("x")
     ax2.set_ylabel("f(x, y0)")
     ax2.legend()
 
-    # --- 3. Tranche en y : x = x0 fixé, y varie ---
+    # --- 3. Slice in y: x = x0 fixed, y varies ---
     ax3 = fig.add_subplot(1, 3, 3)
     y_slice = np.linspace(y0 - 2, y0 + 2, 200)
     z_slice_y = f(x0, y_slice)
     ax3.plot(y_slice, z_slice_y, color="seagreen")
     ax3.scatter([y0], [z0], color="red", zorder=5)
     tangent_y = z0 + df_dy * (y_slice - y0)
-    ax3.plot(y_slice, tangent_y, "r--", label=f"tangente, pente = ∂f/∂y = {df_dy:.2f}")
-    ax3.set_title(f"Tranche en y (x = {x0} fixé)")
+    ax3.plot(y_slice, tangent_y, "r--", label=f"tangent, slope = ∂f/∂y = {df_dy:.2f}")
+    ax3.set_title(f"Slice in y (x = {x0} fixed)")
     ax3.set_xlabel("y")
     ax3.set_ylabel("f(x0, y)")
     ax3.legend()
 
-    fig.suptitle("Dérivées partielles = pentes des tranches de la surface", fontsize=13)
+    fig.suptitle("Partial derivatives = slopes of the surface's slices", fontsize=13)
     fig.tight_layout()
     fig.savefig(save_path, dpi=130)
-    print(f"📊 Figure sauvegardée : {save_path}")
+    print(f"Figure saved: {save_path}")
     plt.show()
 
 
