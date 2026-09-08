@@ -131,4 +131,4 @@ BEGIN
 END
 ```
 
-⬅️ Back to [Multivariable Calculus overview](../README.md) · Previous: [Jacobian Matrix](../03-jacobian-matrix/README.md)
+⬅️ Back to [Multivariable Calculus overview](../README.md) · Previous: [Jacobian Matrix](../03-jacobian-matrix/README.md) · Next: [Lagrangian Multipliers](../05-lagrangian-multipliers/README.md)
