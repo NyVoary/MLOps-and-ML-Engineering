@@ -9,6 +9,7 @@ This is the roadmap sub-section where I learn how calculus extends to functions 
 3. [Jacobian Matrix](03-jacobian-matrix/README.md) 🧮 - the gradient generalized to functions with multiple outputs; the engine behind backpropagation.
 4. [Hessian Matrix](04-hessian-matrix/README.md) 🧠 - the gradient of the gradient; the curvature that tells a minimum from a saddle point.
 5. [Lagrangian Multipliers](05-lagrangian-multipliers/README.md) ⚖️ - optimizing a function under a constraint, by finding where the gradients of the objective and the constraint line up.
+6. [Taylor Series Expansion](06-taylor-series-expansion/README.md) 📐 - approximating a function by a polynomial around a point, one derivative order at a time.
 
 ## Shared conventions
 
