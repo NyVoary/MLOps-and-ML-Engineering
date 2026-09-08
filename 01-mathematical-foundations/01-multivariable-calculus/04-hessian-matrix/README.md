@@ -50,7 +50,7 @@ The easiest way I found to picture the Hessian is a geographical metaphor: the r
 - **At the bottom of a bowl-shaped valley 🥣 (a minimum)**: the slope is zero ($\nabla \mathcal{L} = \mathbf{0}$), and no matter which direction I step in, the terrain goes back up. The curvature is positive in every direction — the Hessian tells me I'm on a local minimum.
 - **On a mountain pass 🐴 (a saddle point)**: the slope is also zero! The gradient alone can't tell the difference from a minimum. But looking at the curvature via the Hessian: walking along the ridge (x-axis), the terrain goes down (negative curvature); walking across the pass (y-axis), it goes up (positive curvature). The Hessian warns me: *"careful, this is a saddle point, not a real minimum!"*
 
-I checked this visually below — see [Visualization](#visualization-📊).
+I checked this visually below — see [Visualization](#visualization).
 
 ## Why the Hessian matters in Machine Learning
 
