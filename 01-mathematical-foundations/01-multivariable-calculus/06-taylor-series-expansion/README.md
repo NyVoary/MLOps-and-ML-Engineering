@@ -1,6 +1,6 @@
 # Taylor Series Expansion 📐
 
-A **Taylor series** is a tool I keep running into in Machine Learning: it lets me approximate a complicated function by a simple polynomial, in the neighborhood of a point.
+A **Taylor series** is a tool that's widely used in Machine Learning: it lets me approximate a complicated function by a simple polynomial, in the neighborhood of a point.
 
 ## The intuition: approximating step by step
 
