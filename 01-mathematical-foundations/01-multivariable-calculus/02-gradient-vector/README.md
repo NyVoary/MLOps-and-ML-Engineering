@@ -1,6 +1,6 @@
 # The Gradient Vector 🧭
 
-The **gradient** gathers all the partial derivatives of a function into a single vector. I covered [Partial Derivatives](../01-partial-derivatives/README.md) first — worth reading before this one.
+The **gradient** gathers all the partial derivatives of a function into a single vector. I covered [Partial Derivatives](../01-partial-derivatives/README.md) first - worth reading before this one.
 
 ## Definition
 
@@ -10,7 +10,7 @@ $$\nabla f(x, y) = \begin{pmatrix} \dfrac{\partial f}{\partial x} \\[6pt] \dfrac
 
 ## Key geometric property
 
-The gradient vector has two characteristics I keep coming back to — they're crucial for Machine Learning:
+The gradient vector has two characteristics I keep coming back to - they're crucial for Machine Learning:
 
 - **Direction**: it always points toward the direction where the function increases the fastest.
 - **Norm (magnitude)**: its size tells me how steep the slope is.
@@ -31,7 +31,7 @@ $$\frac{\partial f}{\partial x} \approx \frac{f(x + h, y) - f(x - h, y)}{2h}$$
 
 ## Visualization 📊
 
-I plotted the level curves of $f(x, y) = x^2y + 4y^2$ together with its gradient field: every gray arrow points toward steepest ascent, and the red arrow at $(1, 2)$ is $\nabla f(1, 2)$ — perpendicular to the level curve through that point, exactly as the theory predicts.
+I plotted the level curves of $f(x, y) = x^2y + 4y^2$ together with its gradient field: every gray arrow points toward steepest ascent, and the red arrow at $(1, 2)$ is $\nabla f(1, 2)$ - perpendicular to the level curve through that point, exactly as the theory predicts.
 
 ![Level curves and gradient field, with the gradient vector highlighted at the evaluation point](gradient_vector_plot.png)
 
@@ -39,8 +39,8 @@ I plotted the level curves of $f(x, y) = x^2y + 4y^2$ together with its gradient
 
 ## Scripts in this folder
 
-- [`gradient_vector.py`](gradient_vector.py) — `analytical_gradient` (exact formula) vs. `numerical_gradient` (centered finite differences), with a validation check (`np.allclose`) between the two.
-- [`plot_gradient_vector.py`](plot_gradient_vector.py) — the visualization above.
+- [`gradient_vector.py`](gradient_vector.py) - `analytical_gradient` (exact formula) vs. `numerical_gradient` (centered finite differences), with a validation check (`np.allclose`) between the two.
+- [`plot_gradient_vector.py`](plot_gradient_vector.py) - the visualization above.
 
 ## Pseudo-code: Gradient Vector
 

@@ -1,6 +1,6 @@
 # Partial Derivatives 🔍
 
-When a function depends on several variables — for example $f(x, y)$ — the **partial derivative** measures how the function changes when I vary **a single variable**, keeping all others constant.
+When a function depends on several variables - for example $f(x, y)$ - the **partial derivative** measures how the function changes when I vary **a single variable**, keeping all others constant.
 
 ## Notation
 
@@ -70,9 +70,9 @@ I plotted the surface of $f(x, y) = x^2y + 4y^2$ and sliced it along $x$ and alo
 
 ## Scripts in this folder
 
-- [`partial_derivatives.py`](partial_derivatives.py) — my "from scratch" implementation: `partial_derivative_x`/`partial_derivative_y` via centered finite differences, checked against the hand-computed exact values.
-- [`interactive_partial_derivatives.py`](interactive_partial_derivatives.py) — comparison with a standard library: SymPy computes the symbolic derivative for display, NumPy computes the numeric one via finite differences.
-- [`plot_partial_derivatives.py`](plot_partial_derivatives.py) — the visualization above.
+- [`partial_derivatives.py`](partial_derivatives.py) - my "from scratch" implementation: `partial_derivative_x`/`partial_derivative_y` via centered finite differences, checked against the hand-computed exact values.
+- [`interactive_partial_derivatives.py`](interactive_partial_derivatives.py) - comparison with a standard library: SymPy computes the symbolic derivative for display, NumPy computes the numeric one via finite differences.
+- [`plot_partial_derivatives.py`](plot_partial_derivatives.py) - the visualization above.
 
 ## Pseudo-code: Partial Derivative (Central Difference)
 

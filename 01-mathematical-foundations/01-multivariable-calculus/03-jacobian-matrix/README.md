@@ -2,7 +2,7 @@
 
 ## From gradient to Jacobian
 
-So far, I've worked with functions that take several inputs $(x, y)$ but produce a single scalar output: $f(x, y) \in \mathbb{R}$ — see [Partial Derivatives](../01-partial-derivatives/README.md) and [the Gradient Vector](../02-gradient-vector/README.md). The gradient gathers all the partial derivatives into a single vector.
+So far, I've worked with functions that take several inputs $(x, y)$ but produce a single scalar output: $f(x, y) \in \mathbb{R}$ - see [Partial Derivatives](../01-partial-derivatives/README.md) and [the Gradient Vector](../02-gradient-vector/README.md). The gradient gathers all the partial derivatives into a single vector.
 
 The **Jacobian matrix** is simply the generalization of the gradient for functions with several inputs **and** several outputs:
 
@@ -36,7 +36,7 @@ $$J(x, y) = \begin{pmatrix} 2xy & x^2 \\ 1 & 3 \end{pmatrix}$$
 
 $$J(2, 3) = \begin{pmatrix} 12 & 4 \\ 1 & 3 \end{pmatrix}$$
 
-> 💡 **Reading the matrix**: row 1 corresponds to output $f_1$, column 1 corresponds to input $x$. The entry $J_{11} = 12$ is the partial derivative $\dfrac{\partial f_1}{\partial x}$ — it tells me $f_1$'s *sensitivity* to $x$. If I nudge $x$ by $+0.01$ (keeping $y = 3$ fixed), $f_1$ increases by roughly $12 \times 0.01 = +0.12$: each entry of the Jacobian is a local rate of change, exactly like a single partial derivative.
+> 💡 **Reading the matrix**: row 1 corresponds to output $f_1$, column 1 corresponds to input $x$. The entry $J_{11} = 12$ is the partial derivative $\dfrac{\partial f_1}{\partial x}$ - it tells me $f_1$'s *sensitivity* to $x$. If I nudge $x$ by $+0.01$ (keeping $y = 3$ fixed), $f_1$ increases by roughly $12 \times 0.01 = +0.12$: each entry of the Jacobian is a local rate of change, exactly like a single partial derivative.
 
 ## General shape rule
 
@@ -66,7 +66,7 @@ $$J = \begin{pmatrix} \dfrac{\partial z_1}{\partial x_1} & \dfrac{\partial z_1}{
 
 **Key takeaway**: for a linear layer $Z = WX + B$, the Jacobian with respect to the input $X$ is nothing but the weight matrix $W$ itself. This is why libraries like PyTorch and TensorFlow are, under the hood, continuously multiplying Jacobian matrices together (via the chain rule) to propagate the error from layer to layer.
 
-## Backpropagation & Gradient Descent — putting it all together 🔄
+## Backpropagation & Gradient Descent - putting it all together 🔄
 
 ### The learning cycle
 
@@ -86,11 +86,11 @@ In a deep network with several layers and neurons, these local-sensitivity compu
 
 $$\underbrace{\frac{\partial \mathcal{L}}{\partial X}}_{1 \times 3} = \underbrace{\frac{\partial \mathcal{L}}{\partial Z}}_{1 \times 2} \times \underbrace{\frac{\partial Z}{\partial X}}_{2 \times 3}$$
 
-redistributes the output error back onto each of the 3 inputs — this is exactly how the error "climbs back" through every layer of the network.
+redistributes the output error back onto each of the 3 inputs - this is exactly how the error "climbs back" through every layer of the network.
 
 ### Gradient Descent recap
 
-**Gradient Descent** is the optimization algorithm that uses these gradients to actually minimize the loss — like descending a mountain in the fog 🌫️: at each step, I look at the slope under my feet and step in the steepest downward direction.
+**Gradient Descent** is the optimization algorithm that uses these gradients to actually minimize the loss - like descending a mountain in the fog 🌫️: at each step, I look at the slope under my feet and step in the steepest downward direction.
 
 | Component | Role |
 |---|---|
@@ -102,7 +102,7 @@ Update rule for a weight $w$:
 
 $$w_{\text{new}} = w_{\text{current}} - \eta \cdot \frac{\partial \mathcal{L}}{\partial w}$$
 
-The **minus sign** is crucial: since the gradient points where the function increases, I step in the opposite direction to decrease it. For example, if $\dfrac{\partial \mathcal{L}}{\partial w} = +5$ (increasing $w$ increases the error), the update rule *decreases* $w$ — exactly what I want.
+The **minus sign** is crucial: since the gradient points where the function increases, I step in the opposite direction to decrease it. For example, if $\dfrac{\partial \mathcal{L}}{\partial w} = +5$ (increasing $w$ increases the error), the update rule *decreases* $w$ - exactly what I want.
 
 **Algorithm outline:**
 
@@ -114,7 +114,7 @@ The **minus sign** is crucial: since the gradient points where the function incr
 
 ## Visualization 📊
 
-Since $\mathbf{F}: \mathbb{R}^2 \to \mathbb{R}^2$ isn't a single surface I can plot, I visualized what the Jacobian actually *means*: how $F$ deforms space. I mapped a small grid around $(2, 3)$ through $F$ — the grid comes out curved (F is nonlinear) — and overlaid the straight-line approximation predicted by the Jacobian. They match closely right at the evaluation point, then drift apart: that's the "local" in "local linear approximation".
+Since $\mathbf{F}: \mathbb{R}^2 \to \mathbb{R}^2$ isn't a single surface I can plot, I visualized what the Jacobian actually *means*: how $F$ deforms space. I mapped a small grid around $(2, 3)$ through $F$ - the grid comes out curved (F is nonlinear) - and overlaid the straight-line approximation predicted by the Jacobian. They match closely right at the evaluation point, then drift apart: that's the "local" in "local linear approximation".
 
 ![Input grid vs. its curved image under F, with the Jacobian's straight-line approximation overlaid](jacobian_matrix_plot.png)
 
@@ -122,8 +122,8 @@ Since $\mathbf{F}: \mathbb{R}^2 \to \mathbb{R}^2$ isn't a single surface I can p
 
 ## Scripts in this folder
 
-- [`jacobian_matrix.py`](jacobian_matrix.py) — `compute_jacobian` via centered finite differences, demonstrated on the worked example above ($\mathbb{R}^2 \to \mathbb{R}^2$) and on a dense neural network layer ($\mathbb{R}^3 \to \mathbb{R}^2$), confirming that the Jacobian of a linear layer equals its weight matrix $W$.
-- [`plot_jacobian_matrix.py`](plot_jacobian_matrix.py) — the visualization above.
+- [`jacobian_matrix.py`](jacobian_matrix.py) - `compute_jacobian` via centered finite differences, demonstrated on the worked example above ($\mathbb{R}^2 \to \mathbb{R}^2$) and on a dense neural network layer ($\mathbb{R}^3 \to \mathbb{R}^2$), confirming that the Jacobian of a linear layer equals its weight matrix $W$.
+- [`plot_jacobian_matrix.py`](plot_jacobian_matrix.py) - the visualization above.
 
 ## Pseudo-code: Jacobian Matrix (Central Difference)
 

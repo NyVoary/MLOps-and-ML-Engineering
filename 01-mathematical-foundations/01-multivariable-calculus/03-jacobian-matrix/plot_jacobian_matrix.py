@@ -7,12 +7,12 @@ how F deforms space.
 
 I plot:
     1. A grid of points in the input space (x, y).
-    2. The same grid after being passed through F — showing how the
+    2. The same grid after being passed through F - showing how the
        straight lines get bent into curves (F is nonlinear).
     3. The linear approximation of F near the evaluation point, using
        only the Jacobian: F(x0+dx, y0+dy) ≈ F(x0, y0) + J @ [dx, dy].
        This approximation lines up with the true curved grid right at
-       the evaluation point, then drifts away — exactly what "local
+       the evaluation point, then drifts away - exactly what "local
        linear approximation" means.
 """
 

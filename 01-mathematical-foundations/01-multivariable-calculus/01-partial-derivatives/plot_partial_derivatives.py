@@ -46,7 +46,7 @@ def plot(x0: float = 1.0, y0: float = 2.0, save_path: str = "partial_derivatives
     Z = f(X, Y)
     ax1.plot_surface(X, Y, Z, cmap="viridis", alpha=0.75, linewidth=0)
     ax1.scatter([x0], [y0], [z0], color="red", s=60, label=f"({x0}, {y0}, {z0:.1f})")
-    ax1.set_title("f(x, y) = x²y + 4y² — surface")
+    ax1.set_title("f(x, y) = x²y + 4y² - surface")
     ax1.set_xlabel("x")
     ax1.set_ylabel("y")
     ax1.set_zlabel("f(x, y)")

@@ -8,7 +8,7 @@ I show that side by side:
     1. f_bowl(x, y) = x^2 + y^2          -> Hessian is positive-definite
        everywhere (both eigenvalues > 0): a true minimum at (0, 0).
     2. f_saddle(x, y) = x^2 - y^2        -> Hessian has one positive and
-       one negative eigenvalue: a saddle point at (0, 0) — going up along
+       one negative eigenvalue: a saddle point at (0, 0) - going up along
        one axis, down along the other, exactly like a mountain pass.
 
 Both functions have gradient = [0, 0] at the origin, so the gradient
@@ -75,7 +75,7 @@ def plot(save_path: str = "hessian_matrix_plot.png") -> None:
         ax.set_zlabel("f(x, y)")
 
     fig.suptitle(
-        "Same zero gradient at the origin — the Hessian's eigenvalues tell them apart",
+        "Same zero gradient at the origin - the Hessian's eigenvalues tell them apart",
         fontsize=12,
     )
     fig.tight_layout()

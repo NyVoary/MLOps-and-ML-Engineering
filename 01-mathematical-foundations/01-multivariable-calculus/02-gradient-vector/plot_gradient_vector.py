@@ -6,7 +6,7 @@ I plot:
     2. The gradient field (quiver) over the whole grid: every arrow points
        toward the direction where f increases the fastest, locally.
     3. The gradient at the evaluation point, highlighted, perpendicular
-       to the level curve passing through it — exactly the geometric
+       to the level curve passing through it - exactly the geometric
        property from the theory.
 """
 

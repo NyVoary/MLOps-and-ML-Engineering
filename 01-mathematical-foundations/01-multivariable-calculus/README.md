@@ -4,10 +4,10 @@ This is the roadmap sub-section where I learn how calculus extends to functions 
 
 ## Topics
 
-1. [Partial Derivatives](01-partial-derivatives/README.md) 🔍 — how a function changes when only one variable moves.
-2. [Gradient Vector](02-gradient-vector/README.md) 🧭 — all partial derivatives gathered into one vector; the direction of steepest ascent.
-3. [Jacobian Matrix](03-jacobian-matrix/README.md) 🧮 — the gradient generalized to functions with multiple outputs; the engine behind backpropagation.
-4. [Hessian Matrix](04-hessian-matrix/README.md) 🧠 — the gradient of the gradient; the curvature that tells a minimum from a saddle point.
+1. [Partial Derivatives](01-partial-derivatives/README.md) 🔍 - how a function changes when only one variable moves.
+2. [Gradient Vector](02-gradient-vector/README.md) 🧭 - all partial derivatives gathered into one vector; the direction of steepest ascent.
+3. [Jacobian Matrix](03-jacobian-matrix/README.md) 🧮 - the gradient generalized to functions with multiple outputs; the engine behind backpropagation.
+4. [Hessian Matrix](04-hessian-matrix/README.md) 🧠 - the gradient of the gradient; the curvature that tells a minimum from a saddle point.
 
 ## Shared conventions
 
@@ -21,7 +21,7 @@ Across all topics, I use the same software-engineering approach (doctests, typin
 $$\frac{\partial f}{\partial x} \approx \frac{f(x + h, y) - f(x - h, y)}{2h}$$
 
 3. **Validation**: comparing the exact (analytical) value against the numerical approximation to check my implementation is correct.
-4. **Visualization**: whenever it helps me build intuition, a `plot_*.py` script using Matplotlib — a 2D/3D picture of the function, its slope, or its curvature.
+4. **Visualization**: whenever it helps me build intuition, a `plot_*.py` script using Matplotlib - a 2D/3D picture of the function, its slope, or its curvature.
 
 ### A note on the step size (h)
 
@@ -45,4 +45,4 @@ $$h \approx \sqrt[3]{\epsilon} \approx \sqrt[3]{10^{-16}} \approx 10^{-5.3}$$
 
 This is why $h = 10^{-5}$ (or $10^{-6}$) is the standard default setting in engineering: it minimizes both the geometric error of the curve and the round-off error of the computer. 💡
 
-Note: for the Hessian (second derivatives), I use a slightly larger $h = 10^{-4}$ instead — the theoretical optimum for a second-order centered difference scales as $\epsilon^{1/4}$ rather than $\epsilon^{1/3}$, since the formula divides by $h^2$ and is more sensitive to round-off error.
+Note: for the Hessian (second derivatives), I use a slightly larger $h = 10^{-4}$ instead - the theoretical optimum for a second-order centered difference scales as $\epsilon^{1/4}$ rather than $\epsilon^{1/3}$, since the formula divides by $h^2$ and is more sensitive to round-off error.
