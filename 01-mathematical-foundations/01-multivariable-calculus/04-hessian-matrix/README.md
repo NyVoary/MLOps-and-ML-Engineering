@@ -4,7 +4,7 @@ If the [Jacobian matrix](../03-jacobian-matrix/README.md) gathers all the **firs
 
 ## What kind of function is this for?
 
-The Hessian applies to functions with several inputs $(x_1, x_2, \dots, x_n)$ that produce a single scalar output $f(\mathbf{x}) \in \mathbb{R}$ - exactly the shape of the loss functions I use in Machine Learning.
+The Hessian applies to functions with several inputs $(x_1, x_2, \dots, x_n)$ that produce a single scalar output $f(\mathbf{x}) \in \mathbb{R}$ - exactly the shape of the loss functions used in Machine Learning.
 
 ## Definition and structure
 
