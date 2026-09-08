@@ -10,7 +10,7 @@ $$\nabla f(x, y) = \begin{pmatrix} \dfrac{\partial f}{\partial x} \\[6pt] \dfrac
 
 ## Key geometric property
 
-The gradient vector has two characteristics I keep coming back to - they're crucial for Machine Learning:
+The gradient vector has two characteristics that are crucial for Machine Learning:
 
 - **Direction**: it always points toward the direction where the function increases the fastest.
 - **Norm (magnitude)**: its size tells me how steep the slope is.
