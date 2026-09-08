@@ -4,9 +4,9 @@
 
 ## The problem: optimizing under a constraint
 
-In plain optimization (like gradient descent), I look for the minimum or maximum of a function $f(x, y)$ with no restriction at all.
+In plain optimization (like gradient descent), the goal is to find the minimum or maximum of a function $f(x, y)$ with no restriction at all.
 
-But in Machine Learning and physics, I often run into constraints:
+But in Machine Learning and physics, constraints often show up:
 
 - 💰 Maximize a profit $f(x, y)$ without exceeding a budget $g(x, y) = c$.
 - 🛡️ Minimize a model's error under a regularization constraint (e.g. limiting the size of the weights).
