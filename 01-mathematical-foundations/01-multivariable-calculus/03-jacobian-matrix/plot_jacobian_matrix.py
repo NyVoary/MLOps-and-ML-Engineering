@@ -95,7 +95,7 @@ def plot(x0: float = 2.0, y0: float = 3.0, save_path: str = "jacobian_matrix_plo
 
     ax_out.scatter([F0[0]], [F0[1]], color="red", zorder=5, label=f"F({x0}, {y0}) = ({F0[0]:.1f}, {F0[1]:.1f})")
     ax_out.plot([], [], "k--", label="linear approx. via J (dashed)")
-    ax_out.set_title("Output space F(x, y) — curved grid vs. Jacobian's straight-line approximation")
+    ax_out.set_title("Output space F(x, y): curved grid vs. J's straight-line approx.")
     ax_out.set_xlabel("f1")
     ax_out.set_ylabel("f2")
     ax_out.legend(fontsize=8)
