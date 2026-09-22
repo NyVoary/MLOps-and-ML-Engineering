@@ -65,14 +65,14 @@ The full checklist below mirrors the [roadmap.sh](https://roadmap.sh/ai/roadmap/
 <details open>
 <summary><b>01. Mathematical Foundations</b></summary>
 
-- [ ] 01.1 [Multivariable Calculus](01-mathematical-foundations/01-multivariable-calculus/README.md)
+- [x] 01.1 [Multivariable Calculus](01-mathematical-foundations/01-multivariable-calculus/README.md)
   - [x] [Partial Derivatives](01-mathematical-foundations/01-multivariable-calculus/01-partial-derivatives/README.md)
   - [x] [Gradient Vectors](01-mathematical-foundations/01-multivariable-calculus/02-gradient-vector/README.md)
   - [x] [Jacobian Matrices](01-mathematical-foundations/01-multivariable-calculus/03-jacobian-matrix/README.md)
   - [x] [Hessian Matrices](01-mathematical-foundations/01-multivariable-calculus/04-hessian-matrix/README.md)
   - [x] [Lagrangian Multipliers](01-mathematical-foundations/01-multivariable-calculus/05-lagrangian-multipliers/README.md)
   - [x] [Taylor Series Expansion](01-mathematical-foundations/01-multivariable-calculus/06-taylor-series-expansion/README.md)
-  - [ ] Vector Calculus
+  - [x] [Vector Calculus](01-mathematical-foundations/01-multivariable-calculus/07-vector-calculus/README.md)
 - [ ] 01.2 Linear Algebra Fundamentals
   - [ ] Vector Spaces
   - [ ] Matrix Decompositions

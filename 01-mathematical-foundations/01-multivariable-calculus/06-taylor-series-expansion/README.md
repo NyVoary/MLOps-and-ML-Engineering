@@ -92,4 +92,4 @@ END
 
 **A note on computing the derivatives $f^{(n)}(a)$**: analytically (symbolically), I'd need the closed-form formula for successive derivatives (easy for $e^x$, where every derivative equals $e^a$ — less easy in general). Numerically, I can estimate the $n$-th derivative via finite differences (what `taylor_series.py` does) or reach for automatic differentiation (e.g. Autograd or PyTorch). The numerical route is what makes the script flexible enough to approximate the Taylor series of *any* Python function, even ones I don't know the analytical derivative of.
 
-⬅️ Back to [Multivariable Calculus overview](../README.md) · Previous: [Lagrangian Multipliers](../05-lagrangian-multipliers/README.md)
+⬅️ Back to [Multivariable Calculus overview](../README.md) · Previous: [Lagrangian Multipliers](../05-lagrangian-multipliers/README.md) · Next: [Vector Calculus](../07-vector-calculus/README.md)
